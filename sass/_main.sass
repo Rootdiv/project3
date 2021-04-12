@@ -1,0 +1,99 @@
+.title
+  font-size: 65px
+  padding-bottom: 15px
+  &-main
+    padding-bottom: 50px
+  &-mess
+    font-size: 25px
+    padding-bottom: 50px
+  &-button
+    display: block
+    width: 210px
+    border: 1px solid
+    font-size: 12px
+    padding: 25px 30px
+    margin: 0 auto
+    &:hover
+      text-decoration: none
+
+/*Блок фото*/
+.photo
+  width: 50%
+  &-block
+    color: white
+    img
+      width: 30px
+      vertical-align: middle
+    &-mess
+      color: white
+      align-items: center
+      justify-content: center
+      flex-direction: column
+  &-mess
+    width: 100%
+    padding-top: 20px
+  &-box
+    background-color: gray
+    height: 300px
+
+/*Блок подписка*/
+.scribe
+  padding: 20px
+  margin-left: -6px
+  &-block
+    padding-bottom: 50px
+    & > .space
+      padding: 100px
+    & > .title
+      font-size: 30px
+      padding-bottom: 5px
+      &-mess
+        font-size: 20px
+    .pole
+      border: 1px solid
+      width: 35%
+      padding: 20px 20px 21px
+
+@media (max-width: 920px)
+  .photo-block
+    flex-wrap: wrap
+  .scribe
+    &-block
+      .pole
+        width: 65%
+@media (max-width: 650px)
+  .title
+    font-size: 40px
+    padding-bottom: 15px
+@media (max-width: 600px)
+  .title
+    font-size: 35px
+    padding-bottom: 15px
+@media (max-width: 470px)
+  .title
+    font-size: 25px
+    padding-bottom: 15px
+  .photo
+    &-block
+      .big-font
+        font-size: 16px
+  .scribe
+    &-block
+      .pole
+        width: 80%
+      .scribe
+        margin-left: unset
+@media (max-width: 335px)
+  .photo
+    &-block
+      img
+        width: 25px
+    &-mess
+      width: auto
+      font-size: 16px
+  .scribe
+    margin-left: unset
+    &-block
+      .title
+        font-size: 25px
+        padding-bottom: 5px
