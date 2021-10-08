@@ -2,6 +2,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
   require_once PROJECT_ROOT.'/components/header.inc';
 ?>
+        <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=<?=API_KEY?>" type="text/javascript"></script>
         <main class="box-small">
           <div class="line"></div>
           <div class="box-small"></div>
@@ -26,7 +27,7 @@
                   <div>
                     <img src="<?=PROJECT_URL?>/img/icons/mail.png" alt="Email" />
                   </div>
-                  <div class="contacts-text"><b>Телефон:</b><br><?=$global_info->getField('tel')?></div>
+                  <div class="contacts-text"><b>Телефон:</b><br><?=$global_info->getField('phone')?></div>
                 </div>
                 <div class="contacts-phone">
                   <div>
@@ -35,23 +36,21 @@
                   <div class="contacts-text"><b>E-mail:</b><br><?=$global_info->getField('email')?></div>
                 </div>
               </div>
-              <div class="contacts-form" onclick="errUnset()">
+              <div class="contacts-form">
                 <div>
-                  <div>
-                    <b>Обратная связь</b>
-                  </div>
-                  <form method="POST" onsubmit="return validFeedback()" action="<?=PROJECT_URL?>/system/controllers/feedback/create.php">
-                    <select name="admMsg">
-                      <option value="1">Администрация</option>
-                      <option value="2">Менеджеры</option>
-                    </select>
-                    <input class="input-text" type="text" name="fio" required placeholder="ФИО">
-                    <input class="input-text" type="email" name="email" required placeholder="E-mail">
-                    <input class="input-text" type="tel" name="tel" required placeholder="Телефон">
-                    <textarea name="text" required placeholder="Ваше сообщение"></textarea>
-                    <button class="size-font">Отправить</button>
-                  </form>
+                  <b>Обратная связь</b>
                 </div>
+                <form name="contacts" method="POST" action="<?=PROJECT_URL?>/system/controllers/feedback/create.php">
+                  <select name="adm_msg">
+                    <option value="1">Администрация</option>
+                    <option value="2">Менеджеры</option>
+                  </select>
+                  <input class="input-text" type="text" name="fio" required placeholder="ФИО">
+                  <input class="input-text" type="email" name="email" required placeholder="E-mail">
+                  <input class="input-text" type="tel" name="phone" required placeholder="Телефон">
+                  <textarea name="text" required placeholder="Ваше сообщение"></textarea>
+                  <button class="size-font">Отправить</button>
+                </form>
               </div>
             </div>
             <div id="map">

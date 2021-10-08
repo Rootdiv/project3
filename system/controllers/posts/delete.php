@@ -1,9 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-if(!empty($_POST['id']) && !empty($_POST['tableID'])){
+if(!empty($_POST['id']) && !empty($_POST['table_id'])){
   if(!form_valid($_POST)) exit;
   $id = (int)$_POST['id'];
-  $table_id = (int)$_POST['tableID'];
+  $table_id = (int)$_POST['table_id'];
   $post = new Post($id);
   $table = new Table($table_id);
   $post->getTable($table->title());
@@ -24,7 +24,7 @@ if(!empty($_POST['id']) && !empty($_POST['tableID'])){
   }else{
     $post->deleteLine();
   }
-  header('Location: '.$_SERVER['HTTP_REFERER']);
+  echo 'Удалено';
 }else{
-  header('Location: '.PROJECT_URL.'/admin/index.php');
+  echo 'Ошибка';
 }

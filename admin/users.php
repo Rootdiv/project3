@@ -1,13 +1,8 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
   require_once PROJECT_ROOT.'/components/header.inc';
-  if(isset($_COOKIE['member_id']) === false){
-    header('Location: '.PROJECT_URL.'/auth/login.php');
-  }else{
-    require_once PROJECT_ROOT.'/components/menu_adm.inc';
-    if(!in_array($user_id, $root) && !in_array($user_id, $manager)){
-      header('Location: '.PROJECT_URL.'/errors/err403.php');
-    }else{ ?>
+  require_once PROJECT_ROOT.'/components/check_adm.inc';
+?>
         <main class="box-small">
           <div class="line"></div>
           <?php if(in_array($user_id, $root)){
@@ -18,7 +13,7 @@
             $from_num = ($page_num - 1) * $per_page;
             $sql_user = $pdo->prepare("SELECT * FROM core_users WHERE id>0 LIMIT $from_num, $per_page");
             echo PHP_EOL ?>
-          <div class="profile" onclick="errUnset()">
+          <div class="profile">
             <?=$menu?>
             <div class="line"></div>
             <div class="flex-box flex-wrap">
@@ -43,7 +38,7 @@
             <?php $sql_user->execute();
             while($item = $sql_user->fetch(PDO::FETCH_LAZY)){
               ?><div class="users flex-box flex-wrap center">
-              <div class="flex-box center box-small" data-id="<?=$item['id']?>" onclick="userModalShow()">
+              <div class="flex-box center box-small" data-id="<?=$item['id']?>">
                 <div class="show">
                   <?=$item['login'].PHP_EOL?>
                 </div>
@@ -53,9 +48,8 @@
                 <div class="box-small">
                   <?=$item['adm'].PHP_EOL?>
                 </div>
-                <div class="users-edit" data-id="<?=$item['id']?>" onclick="userModalShow()">
+                <div class="users-edit" data-id="<?=$item['id']?>">
                   Ред.
-                  <div class="show"></div>
                 </div>
               </div>
               <div class="users-info center flex-box to-end">
@@ -68,7 +62,7 @@
                 <div>
                   <form method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/delete.php">
                     <input hidden name="id" value="<?=$item['id']?>">
-                    <input hidden name="tableID" value="5">
+                    <input hidden name="table_id" value="5">
                     <button class="admin-button">Удалить</button>
                   </form>
                 </div>
@@ -87,6 +81,7 @@
               <?php } echo PHP_EOL ?>
             </div>
             <div id="modal-kit" class="modal-kit">
+              <div class="overlay"></div>
               <div class="modal box" id="modal">
 
               </div>
@@ -99,7 +94,6 @@
           </div>
           <?php } echo PHP_EOL ?>
         </main>
-    <?php } echo PHP_EOL;
-  }
+<?php
   require_once PROJECT_ROOT.'/components/footer.inc';
 ?>

@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-if(!empty($_POST['tableID'])){
+if(!empty($_POST['table_id'])){
   if(!form_valid($_POST)) exit;
   if($_FILES === true){
     $files = $_FILES['photo'];
@@ -12,7 +12,7 @@ if(!empty($_POST['tableID'])){
   //создаем экземпляр универсального класса Post что работать с таблицей (записывать в нее)
   $post = new Post(0);
   //Создаем экземпляр класса Table чтобы по переданному айдишнику таблицы  узнать инфу о таблице например её название
-  $table = new Table($_POST['tableID']);
+  $table = new Table($_POST['table_id']);
   $table_name = $table->getField('title');
   //смотри название таблицы
   //сообщаем название экзэмпляру класса - теперь он знает с какой таблицей работать
@@ -84,5 +84,5 @@ if(!empty($_POST['tableID'])){
   }
   if($post->updateLine($arr_fields, $arr_values)) echo 'Данные успешно добавлены';
 }else{
-  header('Location: '.PROJECT_URL.'/main.php');
+  echo 'Ошибка';
 }

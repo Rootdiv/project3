@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-if(!empty($_POST['tableID']) && !empty($_POST['id'])){
+if(!empty($_POST['table_id']) && !empty($_POST['id'])){
   if(!form_valid($_POST)) exit;
   if($_FILES && $_FILES['photo']['name'] !== ''){
     $files = $_FILES['photo'];
@@ -10,7 +10,7 @@ if(!empty($_POST['tableID']) && !empty($_POST['id'])){
     }
   }
   $post = new Post($_POST['id']);
-  $table = new Table($_POST['tableID']);
+  $table = new Table($_POST['table_id']);
   $table_name = $table->getField('title');
   $post->getTable($table_name);
   $post_columns_name = $post->getTableColumnsNames();
@@ -67,5 +67,5 @@ if(!empty($_POST['tableID']) && !empty($_POST['id'])){
   }
   if($post->updateLine($arr_fields, $arr_values)) echo 'Данные успешно обновлены';
 }else{
-  header('Location: '.PROJECT_URL.'/admin/index.php');
+  echo 'Ошибка';
 }

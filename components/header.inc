@@ -3,11 +3,15 @@
   $parts = explode('/', $url_parts['path']);
   $filename = $parts[count($parts) - 1];
   $filename = array_pop($parts);
-  if($filename == null) $title = 'Админ панель';
+  if($filename == null && isset($index)) $title = 'Проверка...';
   else{
-    $page = new Page();
-    $page->getIdByName($filename);
-    $title = $page->getField('title');
+    if(!isset($error)){
+      $page = new Page();
+      $page->getIdByName($filename);
+      $title = $page->getField('title');
+    }else{
+      $title = 'Ошибка';
+    }
   }
 
   $per_page = 4; //Данные для пагинации
@@ -73,7 +77,7 @@
                 <ul>
                   <li><?=$login_set?></li>
                   <li>
-                    <a id="basket_set" href="<?=PROJECT_URL?>/basket.php">
+                    <a id="basket-set" href="<?=PROJECT_URL?>/basket.php">
                       <img src="<?=PROJECT_URL?>/img/icons/basket.png" alt="Корзина" />Корзина (<?php session_start();
                       echo (isset($_SESSION['basket'])) ? count($_SESSION['basket']) : 0; ?>)
                     </a>

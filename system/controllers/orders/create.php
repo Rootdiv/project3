@@ -10,15 +10,15 @@ if(isset($_SESSION['basket']) == false || isset($_SESSION['basket']) == null){
   $all_goods = $_SESSION['basket'];
   foreach($all_goods as $elem){
     $item = new Goods($elem);
-    $tovar[] = $item->getField('title');
-    $art_arr[] = $item->getField('art');
+    $product[] = $item->getField('title');
+    $art_arr[] = $item->getField('article');
     $sum[] = $item->getField('price');
   }
-  $size = $item->getField('razmer');
-  $kolichestvo_arr = $_POST['kolichestvo'];
-  $tovar_name = json_encode($tovar, JSON_UNESCAPED_UNICODE);
+  $size = $item->getField('sized');
+  $quantity_arr = $_POST['quantity'];
+  $product_name = json_encode($product, JSON_UNESCAPED_UNICODE);
   $art = json_encode($art_arr, JSON_UNESCAPED_UNICODE);
-  $kolichestvo = json_encode($kolichestvo_arr, JSON_UNESCAPED_UNICODE);
+  $quantity = json_encode($quantity_arr, JSON_UNESCAPED_UNICODE);
   //Записываем заказ базу данных
   $order_base = new Orders(0);
   $name_columns_table = $order_base->getTableColumnsNames();
@@ -31,49 +31,49 @@ if(isset($_SESSION['basket']) == false || isset($_SESSION['basket']) == null){
     }
   }
   //Через array_unshift добавляем ранее выкинутые элементы кроме админ поля.
-  array_unshift($arr_values, "$tovar_name", "$art", "$size", "$kolichestvo");
-  array_unshift($arr_fields, 'tovar_name', 'art', 'razmer', 'kolichestvo');
+  array_unshift($arr_values, "$product_name", "$art", "$size", "$quantity");
+  array_unshift($arr_fields, 'product_name', 'article', 'sized', 'quantity');
   if(!$order_base->createLine($arr_fields, $arr_values)) exit('Произошла системная ошибка');
   //Если заказ успешно записан базу данных, отправляем его на почту и боту.
   //Формируем текст сообщения для почты и бота.
-  $order = 'Новый заказ №'.$order_base->getField('id');
-  $tovar_name_tm = 'Товар: '.str_replace('","', ', ', trim($tovar_name, '["]'));
+  $order = 'Новый заказ &numero;'.$order_base->getField('id');
+  $product_name_tm = 'Товар: '.str_replace('","', ', ', trim($product_name, '["]'));
   $art_tm = 'Артикул: '.str_replace('","', ', ', trim($art, '["]'));
   $size_tm = 'Размер: '.$size;
-  $kolichestvo_tm = 'Количество: '.str_replace('","', ', ', trim($kolichestvo, '["]'));
-  $summa_tm = 'Сумма: '.$_POST['summa'].' руб.';
-  if($_POST['dostavka'] == 500){
-    $dostavka_tm = 'Доставка: Курьерская служба - '.$_POST['dostavka'].' руб.';
-  }elseif($_POST['dostavka'] == 250){
-    $dostavka_tm = 'Доставка: Пункт самовывоза - '.$_POST['dostavka'].' руб.';
-  }elseif($_POST['dostavka'] == 1000){
-    $dostavka_tm = 'Доставка: Почта России - '.$_POST['dostavka'].' руб.';
+  $quantity_tm = 'Количество: '.str_replace('","', ', ', trim($quantity, '["]'));
+  $amount_tm = 'Сумма: '.$_POST['amount'].' руб.';
+  if($_POST['delivery'] == 500){
+    $delivery_tm = 'Доставка: Курьерская служба - '.$_POST['delivery'].' руб.';
+  }elseif($_POST['delivery'] == 250){
+    $delivery_tm = 'Доставка: Пункт самовывоза - '.$_POST['delivery'].' руб.';
+  }elseif($_POST['delivery'] == 1000){
+    $delivery_tm = 'Доставка: Почта России - '.$_POST['delivery'].' руб.';
   }
   $first_name_tm = 'Имя: '.$_POST['first_name'];
   $last_name_tm = 'Фамилия: '.$_POST['last_name'];
   $address_tm = 'Адрес: '.$_POST['address'];
-  $gorod_tm = 'Город: '.$_POST['gorod'];
-  $indeks_tm = 'Индекс: '.$_POST['indeks'];
-  $tel_tm = 'Телефон: '.$_POST['tel'];
+  $city_tm = 'Город: '.$_POST['city'];
+  $postcode_tm = 'Индекс: '.$_POST['postcode'];
+  $phone_tm = 'Телефон: '.$_POST['phone'];
   $email_tm = 'E-Mail: '.$_POST['email'];
-  $itog_tm = 'Сумма с доставкой: '.$_POST['itog'].' руб.';
-  $oplata_tm = 'Способ оплаты: '.$_POST['oplata'];
+  $total_tm = 'Сумма с доставкой: '.$_POST['total'].' руб.';
+  $payment_tm = 'Способ оплаты: '.$_POST['payment'];
   $msg_orders = $order.PHP_EOL.
-    $tovar_name_tm.PHP_EOL.
+    $product_name_tm.PHP_EOL.
     $art_tm.PHP_EOL.
     $size_tm.PHP_EOL.
-    $kolichestvo_tm.PHP_EOL.
-    $summa_tm.PHP_EOL.
-    $dostavka_tm.PHP_EOL.
+    $quantity_tm.PHP_EOL.
+    $amount_tm.PHP_EOL.
+    $delivery_tm.PHP_EOL.
     $first_name_tm.PHP_EOL.
     $last_name_tm.PHP_EOL.
     $address_tm.PHP_EOL.
-    $gorod_tm.PHP_EOL.
-    $indeks_tm.PHP_EOL.
-    $tel_tm.PHP_EOL.
+    $city_tm.PHP_EOL.
+    $postcode_tm.PHP_EOL.
+    $phone_tm.PHP_EOL.
     $email_tm.PHP_EOL.
-    $itog_tm.PHP_EOL.
-    $oplata_tm.PHP_EOL;
+    $total_tm.PHP_EOL.
+    $payment_tm.PHP_EOL;
   //Отправляем письмо всем менеджерам.
   $mail_orders = str_replace(PHP_EOL, "<br>", $msg_orders);
   $mail_send_to = count($manager_mail);
@@ -90,5 +90,5 @@ if(isset($_SESSION['basket']) == false || isset($_SESSION['basket']) == null){
   file_get_contents(URL.'sendMessage?parse_mode=HTML&chat_id='.USER_TG.'&text='.$msg);
   unset($_SESSION['basket']);
   session_destroy();
-  echo 'Заказ успешно записан';
+  echo 'Новый заказ записан';
 }

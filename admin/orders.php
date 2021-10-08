@@ -1,13 +1,7 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
   require_once PROJECT_ROOT.'/components/header.inc';
-  if(isset($_COOKIE['member_id']) === false){
-    header('Location: '.PROJECT_URL.'/auth/login.php');
-  }else{
-    require_once PROJECT_ROOT.'/components/menu_adm.inc';
-    if(!in_array($user_id, $root) && !in_array($user_id, $manager)){
-      header('Location: '.PROJECT_URL.'/errors/err403.php');
-    }else{
+  require_once PROJECT_ROOT.'/components/check_adm.inc';
       if(!isset($_GET['orders'])) header('Location: '.PROJECT_URL.'/admin/orders.php?orders=act&page_num=1'); ?>
         <main class="box-small">
           <div class="line"></div>
@@ -28,21 +22,21 @@
                 ++$i;
                 if(($i % 2) == 1) echo '<div class="d-row">'."\t";
                 echo '<div class="d-cell">';
-                $tovar_name = str_replace('","', ', ', trim($item['tovar_name'], '["]'));
-                $art = str_replace('","', ', ', trim($item['art'], '["]'));
-                $kolichestvo = str_replace('","', ', ', trim($item['kolichestvo'], '["]'));
-                if($item['dostavka'] == 500) $dostavka = 'Курьерская служба - '.$item['dostavka'];
-                elseif($item['dostavka'] == 250) $dostavka = 'Пункт самовывоза - '.$item['dostavka'];
-                elseif($item['dostavka'] == 1000) $dostavka = 'Почта России - '.$item['dostavka'];
+                $product_name = str_replace('","', ', ', trim($item['product_name'], '["]'));
+                $art = str_replace('","', ', ', trim($item['article'], '["]'));
+                $quantity = str_replace('","', ', ', trim($item['quantity'], '["]'));
+                if($item['delivery'] == 500) $delivery = 'Курьерская служба - '.$item['delivery'];
+                elseif($item['delivery'] == 250) $delivery = 'Пункт самовывоза - '.$item['delivery'];
+                elseif($item['delivery'] == 1000) $delivery = 'Почта России - '.$item['delivery'];
                 echo PHP_EOL ?>
                 <div class="orders">
                   <div class="flex-box">
-                    <div>Заказ №</div>
+                    <div>Заказ &numero;</div>
                     <div class="box-small"></div><?=$item['id'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Товар</div>
-                    <div class="box-small"></div><?=$tovar_name.PHP_EOL?>
+                    <div class="box-small"></div><?=$product_name.PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Артикул</div>
@@ -50,19 +44,19 @@
                   </div>
                   <div class="flex-box">
                     <div>Размер</div>
-                    <div class="box-small"></div><?=$item['razmer'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item['sized'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Количество</div>
-                    <div class="box-small"></div><?=$kolichestvo.PHP_EOL?>
+                    <div class="box-small"></div><?=$quantity.PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Сумма</div>
-                    <div class="box-small"></div><?=$item['summa']?> руб.
+                    <div class="box-small"></div><?=$item['amount']?> руб.
                   </div>
                   <div class="flex-box">
                     <div>Доставка</div>
-                    <div class="box-small"></div><?=$dostavka?> руб.
+                    <div class="box-small"></div><?=$delivery?> руб.
                   </div>
                   <div class="flex-box">
                     <div>Имя</div>
@@ -78,15 +72,15 @@
                   </div>
                   <div class="flex-box">
                     <div>Город</div>
-                    <div class="box-small"></div><?=$item['gorod'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item['city'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Индекс</div>
-                    <div class="box-small"></div><?=$item['indeks'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item['postcode'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Телефон</div>
-                    <div class="box-small"></div><?=$item['tel'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item['phone'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>E-mail</div>
@@ -94,11 +88,11 @@
                   </div>
                   <div class="flex-box">
                     <div>Итог</div>
-                    <div class="box-small"></div><?=$item['itog']?> руб.
+                    <div class="box-small"></div><?=$item['total']?> руб.
                   </div>
                   <div class="flex-box">
                     <div>Оплата</div>
-                    <div class="box-small"></div><?=$item['oplata'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item['payment'].PHP_EOL?>
                   </div>
                   <?php if($item['status'] !== 'end' && $item['status'] !== 'new'){
                     ?>
@@ -117,7 +111,7 @@
                     </div>
                   <?php } ?>
                   <?php if($item['status'] == 'new'){ echo PHP_EOL ?>
-                    <form method="POST" action="<?=PROJECT_URL?>/system/controllers/orders/work.php">
+                    <form name="order" method="POST" action="<?=PROJECT_URL?>/system/controllers/orders/work.php">
                       <input hidden name="id" value="<?=$item['id']?>">
                       <input hidden name="user_id" value="<?=$user_id?>">
                       <input hidden name="name" value="<?=$username?>">
@@ -125,7 +119,7 @@
                     </form>
                   <?php }elseif($item['status'] == 'act'.$user_id){
                     echo PHP_EOL ?>
-                    <form method="POST" action="<?=PROJECT_URL?>/system/controllers/orders/update.php">
+                    <form name="order" method="POST" action="<?=PROJECT_URL?>/system/controllers/orders/update.php">
                       <input hidden name="id" value="<?=$item['id']?>">
                       <button class="admin-button">Заказ выполнен</button>
                     </form>
@@ -154,7 +148,6 @@
             <?php } echo PHP_EOL ?>
           </div>
         </main>
-    <?php } echo PHP_EOL;
-  }
+<?php
   require_once PROJECT_ROOT.'/components/footer.inc';
 ?>

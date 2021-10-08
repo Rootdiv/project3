@@ -95,7 +95,7 @@
             }
             if(isset($_GET['size'])){
               $size = (int)$_GET['size'];
-              $size_text = "AND razmer=$size";
+              $size_text = "AND sized=$size";
             }
             else{
               $size_text = '';

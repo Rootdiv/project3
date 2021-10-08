@@ -9,16 +9,16 @@ if(isset($_COOKIE['member_id']) === false){
           <div class="line"></div>
         <?php if(isset($_GET['history']) == null){
           echo PHP_EOL ?>
-          <div class="profile" onclick="errUnset()">
+          <div class="profile">
             <?=$menu?>
             <div class="line"></div>
             <div class="box-small">При изменении пароля будет необходимо повторно авторизоваться.</div>
             <div class="box-small">
               <?php $item_profile = new Member((int)$user_id)
               ?><div class="member">Логин: <?=$item_profile->getField('login')?></div>
-              <form method="POST" onsubmit="return validEdit()" action="<?=PROJECT_URL?>/system/controllers/posts/update.php">
+              <form name="profile" method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/update.php">
                 <label class="member">
-                  <input hidden name="tableID" value="5">
+                  <input hidden name="table_id" value="5">
                   <input hidden name="id" value="<?=$item_profile->getField('id')?>">
                   Имя:&nbsp;<input type="text" name="username" value="<?=$item_profile->getField('username')?>" autocomplete="off" required>
                 </label>
@@ -27,7 +27,7 @@ if(isset($_COOKIE['member_id']) === false){
                 </label>
                 <div class="member pass">Пароль:&nbsp;
                   <input id="pass-input" type="password" name="password" autocomplete="off">
-                  <label for="pass-input" class="pass-control" onclick="return showHidePass(this)"></label>
+                  <label for="pass-input" class="pass-control"></label>
                 </div>
                 <button class="user">Сохранить</button>
               </form>
@@ -59,21 +59,21 @@ if(isset($_COOKIE['member_id']) === false){
                   ++$i;
                   if(($i % 2) == 1) echo '<div class="d-row">'."\t";
                   echo '<div class="d-cell">';
-                  $tovar_name_profile = str_replace('","', ', ', trim($item_profile['tovar_name'], '["]'));
-                  $art_profile = str_replace('","', ', ', trim($item_profile['art'], '["]'));
-                  $size_profile = str_replace('","', ', ', trim($item_profile['razmer'], '["]'));
-                  $kolichestvo_profile = str_replace('","', ', ', trim($item_profile['kolichestvo'], '["]'));
-                  if($item_profile['dostavka'] == 500){
-                    $dostavka_profile = 'Курьерская служба - '.$item_profile['dostavka'];
-                  }elseif($item_profile['dostavka'] == 250){
-                    $dostavka_profile = 'Пункт самовывоза - '.$item_profile['dostavka'];
-                  }elseif($item_profile['dostavka'] == 1000){
-                    $dostavka_profile = 'Почта России - '.$item_profile['dostavka'];
+                  $product_name_profile = str_replace('","', ', ', trim($item_profile['product_name'], '["]'));
+                  $art_profile = str_replace('","', ', ', trim($item_profile['article'], '["]'));
+                  $size_profile = str_replace('","', ', ', trim($item_profile['sized'], '["]'));
+                  $quantity_profile = str_replace('","', ', ', trim($item_profile['quantity'], '["]'));
+                  if($item_profile['delivery'] == 500){
+                    $delivery_profile = 'Курьерская служба - '.$item_profile['delivery'];
+                  }elseif($item_profile['delivery'] == 250){
+                    $delivery_profile = 'Пункт самовывоза - '.$item_profile['delivery'];
+                  }elseif($item_profile['delivery'] == 1000){
+                    $delivery_profile = 'Почта России - '.$item_profile['delivery'];
                   } echo PHP_EOL ?>
                   <div class="orders">
                     <div class="flex-box">
                       <div>Товар</div>
-                      <div class="box-small"></div><?=$tovar_name_profile.PHP_EOL?>
+                      <div class="box-small"></div><?=$product_name_profile.PHP_EOL?>
                     </div>
                     <div class="flex-box">
                       <div>Артикул</div>
@@ -85,15 +85,15 @@ if(isset($_COOKIE['member_id']) === false){
                     </div>
                     <div class="flex-box">
                       <div>Количество</div>
-                      <div class="box-small"></div><?=$kolichestvo_profile.PHP_EOL?>
+                      <div class="box-small"></div><?=$quantity_profile.PHP_EOL?>
                     </div>
                     <div class="flex-box">
                       <div>Сумма</div>
-                      <div class="box-small"></div><?=$item_profile['summa']?> руб.
+                      <div class="box-small"></div><?=$item_profile['amount']?> руб.
                     </div>
                     <div class="flex-box">
                       <div>Доставка</div>
-                      <div class="box-small"></div><?=$dostavka_profile?> руб.
+                      <div class="box-small"></div><?=$delivery_profile?> руб.
                     </div>
                     <div class="flex-box">
                       <div>Имя</div>
@@ -109,15 +109,15 @@ if(isset($_COOKIE['member_id']) === false){
                     </div>
                     <div class="flex-box">
                       <div>Город</div>
-                      <div class="box-small"></div><?=$item_profile['gorod'].PHP_EOL?>
+                      <div class="box-small"></div><?=$item_profile['city'].PHP_EOL?>
                     </div>
                     <div class="flex-box">
                       <div>Индекс</div>
-                      <div class="box-small"></div><?=$item_profile['indeks'].PHP_EOL?>
+                      <div class="box-small"></div><?=$item_profile['postcode'].PHP_EOL?>
                     </div>
                     <div class="flex-box">
                       <div>Телефон</div>
-                      <div class="box-small"></div><?=$item_profile['tel'].PHP_EOL?>
+                      <div class="box-small"></div><?=$item_profile['phone'].PHP_EOL?>
                     </div>
                     <div class="flex-box">
                       <div>E-mail</div>
@@ -125,11 +125,11 @@ if(isset($_COOKIE['member_id']) === false){
                     </div>
                     <div class="flex-box">
                       <div>Итог</div>
-                      <div class="box-small"></div><?=$item_profile['itog']?> руб.
+                      <div class="box-small"></div><?=$item_profile['total']?> руб.
                     </div>
                     <div class="flex-box">
                       <div>Оплата</div>
-                      <div class="box-small"></div><?=$item_profile['oplata'].PHP_EOL?>
+                      <div class="box-small"></div><?=$item_profile['payment'].PHP_EOL?>
                     </div>
                     <div class="box-small"></div>
                   </div>

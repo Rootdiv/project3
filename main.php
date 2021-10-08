@@ -55,7 +55,8 @@
                 </div>
                 <div class="new-font photo-mess">Самые низкие цены в<br>Москве.<br>Нашли дешевле? Вернём<br>разницу.</div>
               </div>
-              <div class="photo-box bg-fix flex-box photo-block-mess box size-font" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<?=PROJECT_URL?>/img/6.jpg);">
+              <div class="photo-box bg-fix flex-box photo-block-mess box size-font"
+                style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(<?=PROJECT_URL?>/img/6.jpg);">
                 <div class="big-font">Спортивная<br>одежда</div>
                 <div class="new-font">от 590 руб.</div>
               </div>
@@ -82,8 +83,8 @@
             <div class="new-font size-font title-mess">
               Подписывайся и следи за новинками и выгодными предложениями.
             </div>
-            <form name="scribe" onsubmit="return validate()" method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/create.php">
-              <input hidden name="tableID" value="6">
+            <form name="scribe" method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/create.php">
+              <input hidden name="table_id" value="6">
               <input class="pole" type="email" name="email" placeholder="e-mail">
               <button class="scribe">Подписаться</button>
             </form>

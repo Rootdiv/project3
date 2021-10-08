@@ -1,5 +1,6 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
+  $error = true;
   require_once PROJECT_ROOT.'/components/header.inc';
 ?>
         <main class="box-small">

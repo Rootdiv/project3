@@ -16,7 +16,6 @@ body, input, select, textarea, button {
 .box {
   padding: 20px;
 }
-
 .box-small {
   padding: 10px;
 }
@@ -30,7 +29,6 @@ body, input, select, textarea, button {
 .flex-box {
   display: flex;
 }
-
 .flex-wrap {
   flex-wrap: wrap;
 }
@@ -39,13 +37,12 @@ a {
   text-decoration: none;
   color: black;
 }
-
 a:hover {
   text-decoration: underline;
 }
 
 .new-font {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-style: italic;
 }
 
@@ -61,7 +58,6 @@ a:hover {
 .space {
   padding: 70px;
 }
-
 .space-min {
   padding: 50px;
 }
@@ -69,7 +65,6 @@ a:hover {
 .title-font {
   font-size: 35px;
 }
-
 .title-pad {
   padding-bottom: 5px;
 }
@@ -130,8 +125,8 @@ button {
 .msg {
   color: green;
   font-style: italic;
+  text-align: center;
 }
-
 .msg-error {
   color: red;
 }
@@ -145,13 +140,11 @@ button {
     right: 20px;
   }
 }
-
 @media (max-width: 650px) {
   .global-container {
     padding: 62px 5px;
   }
 }
-
 .header {
   display: flex;
   align-items: center;
@@ -165,20 +158,16 @@ button {
   font-size: 12px;
   flex-grow: 1;
 }
-
 .top-nav ul {
   list-style-type: none;
   padding-left: 32px;
 }
-
 .top-nav ul li {
   display: inline-block;
 }
-
 .top-nav ul li:not(:last-child) {
   padding-right: 24px;
 }
-
 .top-nav ul li:last-child {
   padding-right: 12px;
 }
@@ -186,7 +175,6 @@ button {
 .to-end {
   margin: 0 0 0 auto;
 }
-
 .to-end img {
   vertical-align: middle;
   margin-left: -5px;
@@ -202,7 +190,6 @@ button {
     padding-right: 10px;
   }
 }
-
 @media (max-width: 770px) {
   .logo-mobile {
     cursor: pointer;
@@ -222,6 +209,7 @@ button {
   .logo-mobile img {
     width: 55px;
   }
+
   .top-nav {
     position: absolute;
     top: 65px;
@@ -241,6 +229,7 @@ button {
   .top-nav ul li {
     display: list-item;
   }
+
   .menu-mobile {
     font-size: 15px;
     min-width: 180px;
@@ -259,21 +248,17 @@ button {
     white-space: nowrap;
   }
 }
-
 .title {
   font-size: 65px;
   padding-bottom: 15px;
 }
-
 .title-main {
   padding-bottom: 50px;
 }
-
 .title-mess {
   font-size: 25px;
   padding-bottom: 50px;
 }
-
 .title-button {
   display: block;
   width: 210px;
@@ -282,7 +267,6 @@ button {
   padding: 25px 30px;
   margin: 0 auto;
 }
-
 .title-button:hover {
   text-decoration: none;
 }
@@ -291,28 +275,23 @@ button {
 .photo {
   width: 50%;
 }
-
 .photo-block {
   color: white;
 }
-
 .photo-block img {
   width: 30px;
   vertical-align: middle;
 }
-
 .photo-block-mess {
   color: white;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
-
 .photo-mess {
   width: 100%;
   padding-top: 20px;
 }
-
 .photo-box {
   background-color: gray;
   height: 300px;
@@ -323,24 +302,19 @@ button {
   padding: 20px;
   margin-left: -6px;
 }
-
 .scribe-block {
   padding-bottom: 50px;
 }
-
 .scribe-block > .space {
   padding: 100px;
 }
-
 .scribe-block > .title {
   font-size: 30px;
   padding-bottom: 5px;
 }
-
 .scribe-block > .title-mess {
   font-size: 20px;
 }
-
 .scribe-block .pole {
   border: 1px solid;
   width: 35%;
@@ -351,33 +325,33 @@ button {
   .photo-block {
     flex-wrap: wrap;
   }
+
   .scribe-block .pole {
     width: 65%;
   }
 }
-
 @media (max-width: 650px) {
   .title {
     font-size: 40px;
     padding-bottom: 15px;
   }
 }
-
 @media (max-width: 600px) {
   .title {
     font-size: 35px;
     padding-bottom: 15px;
   }
 }
-
 @media (max-width: 470px) {
   .title {
     font-size: 25px;
     padding-bottom: 15px;
   }
+
   .photo-block .big-font {
     font-size: 16px;
   }
+
   .scribe-block .pole {
     width: 80%;
   }
@@ -385,7 +359,6 @@ button {
     margin-left: unset;
   }
 }
-
 @media (max-width: 335px) {
   .photo-block img {
     width: 25px;
@@ -394,6 +367,7 @@ button {
     width: auto;
     font-size: 16px;
   }
+
   .scribe {
     margin-left: unset;
   }
@@ -402,25 +376,21 @@ button {
     padding-bottom: 5px;
   }
 }
-
 .footer {
   display: flex;
   justify-content: space-between;
   font-size: 12px;
   text-align: start;
 }
-
 .footer p {
   font-size: 17px;
   font-weight: bold;
   text-transform: uppercase;
 }
-
 .footer ul {
   list-style-type: none;
   padding: 0;
 }
-
 .footer li {
   line-height: 1.7;
 }
@@ -432,11 +402,9 @@ button {
 .sots-seti {
   line-height: 1.7;
 }
-
 .sots-seti > p {
   margin-top: 13px;
 }
-
 .sots-seti img {
   width: 30px;
   border: 1px solid;
@@ -451,37 +419,32 @@ button {
   .footer {
     flex-direction: column;
   }
+
   .mobile {
     display: block;
   }
 }
-
 @media (max-width: 470px) {
   .footer {
     font-size: 15px;
   }
 }
-
 .catalog {
   justify-content: space-around;
 }
-
 .catalog-sort {
   text-align: start;
   justify-content: center;
 }
-
 .catalog-sort a {
   display: block;
   padding: 10px;
 }
-
 .catalog-name {
   width: 150px;
   border-bottom: 1px solid;
   cursor: pointer;
 }
-
 .catalog-photo {
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: block;
@@ -495,12 +458,10 @@ button {
   background: rgba(255, 255, 255, 0.9) !important;
   position: absolute;
 }
-
 .categories-img, .size-img, .prices-img {
   float: right;
   padding-top: 3px;
 }
-
 .categories-img-inv, .size-img-inv, .prices-img-inv {
   padding-bottom: 3px;
   transform: rotate(180deg);
@@ -516,11 +477,9 @@ button {
     align-items: center;
   }
 }
-
 .page-num {
   justify-content: center;
 }
-
 .page-num a {
   text-align: center;
   width: 35px;
@@ -534,7 +493,6 @@ button {
   margin-right: 20px;
   margin-bottom: 5px;
 }
-
 .pagination-active {
   background-color: white;
   border: 1px solid;
@@ -546,25 +504,20 @@ button {
   background-color: whitesmoke;
   justify-content: center;
 }
-
 .detail-photo-img {
   width: 60%;
   height: 700px;
 }
-
 .detail-title {
   font-size: 30px;
   padding-bottom: 5px;
 }
-
-.detail-art {
+.detail-article {
   font-size: 12px;
 }
-
 .detail-size {
   justify-content: center;
 }
-
 .detail-size-item {
   border: 1px solid;
   padding: 5px;
@@ -588,56 +541,50 @@ button {
     width: 100%;
   }
 }
-
 @media (max-width: 650px) {
-  .detail-art {
+  .detail-article {
     font-size: unset;
   }
+
   .description {
     font-size: unset;
   }
 }
-
 @media (max-width: 335px) {
   .add-basket {
     padding: 10px;
   }
 }
-
 .basket {
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-.basket-block {
+.basket-title {
   padding-bottom: 50px;
 }
-
-.basket-block > .title-mess {
+.basket-title > .title-mess {
   font-size: 20px;
 }
-
 .basket > .space {
   padding: 100px;
 }
-
 .basket-line {
   text-align: center;
   align-items: center;
 }
-
 .basket-line div {
   width: 95px;
 }
-
 .basket-line div:last-child {
   width: 65px;
 }
-
+.basket-line a {
+  display: inline-block;
+  width: 100%;
+}
 .basket-img {
   padding: 50px;
   justify-content: center;
 }
-
 .basket-price {
   color: orange;
 }
@@ -645,11 +592,9 @@ button {
 #basket-set {
   text-align: start;
 }
-
 #basket-set > div:nth-child(2n) {
   background-color: whitesmoke;
 }
-
 #basket-set > div:nth-child(2n) .number:nth-child(2n) {
   background-color: whitesmoke;
 }
@@ -658,7 +603,6 @@ button {
   position: relative;
   margin-right: 20px;
 }
-
 .number-plus {
   display: inline-block;
   cursor: pointer;
@@ -672,7 +616,6 @@ button {
   top: 0;
   right: 0;
 }
-
 .number-minus {
   display: inline-block;
   cursor: pointer;
@@ -687,7 +630,7 @@ button {
   bottom: 0;
 }
 
-.kol {
+.quantity {
   border: none;
   padding: 0;
   width: 25px;
@@ -698,73 +641,63 @@ button {
   background-color: inherit;
   -moz-appearance: textfield;
 }
-
-.kol::-webkit-inner-spin-button, .kol::-webkit-outer-spin-button {
+.quantity::-webkit-inner-spin-button, .quantity::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
 
-.tovar {
+.product {
   text-align: start;
 }
-
-.tovar > div:first-child {
+.product > div:first-child {
   padding-left: 5px;
   width: 120px;
 }
-
-.tovar-photo {
+.product-photo {
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
-
-.tovar-photo img {
+.product-photo img {
   width: 100px;
 }
 
-.itogo {
+.total {
   background-color: whitesmoke;
   padding: 20px 10px;
 }
 
-.ap-block {
+.delivery-block {
   background-color: whitesmoke;
   padding: 10% 20%;
   border: 2px solid rgba(0, 0, 0, 0.1);
 }
-
-.ap-block label {
+.delivery-block label {
   text-align: start;
   width: 50%;
   text-transform: uppercase;
   padding-top: 40px;
 }
-
-.ap-block .label {
+.delivery-block .label {
   width: 100%;
   text-align: start;
 }
-
-.ap-block input {
+.delivery-block input {
   margin-top: 10px;
   background-color: white;
   padding: 15px;
   width: 100%;
   border: 2px solid rgba(0, 0, 0, 0.1);
 }
-
-.ap-block > .title-mess {
+.delivery-block > .title-mess {
   font-size: 20px;
   padding-bottom: 80px;
 }
-
-.ap-block select {
+.delivery-block select {
   margin-top: 10px;
   background-color: white;
   padding: 15px;
   width: 100%;
   border: 2px solid rgba(0, 0, 0, 0.1);
 }
-
-.ap-block button {
+.delivery-block button {
   font-size: 14px;
   padding: 15px;
   width: 200px;
@@ -773,53 +706,58 @@ button {
 .order div {
   width: 50%;
 }
-
 .order div:first-child {
   text-align: right;
   margin-right: 15px;
 }
-
 .order div:last-child {
   text-align: left;
 }
 
-.oplata > label {
+.payment > label {
   width: 100%;
   text-align: left;
   padding-top: unset;
 }
 
 @media (max-width: 768px) {
-  .ap-block label {
+  .delivery-block label {
     width: 100%;
   }
-  .ap-block div {
+  .delivery-block div {
     flex-wrap: wrap;
   }
-  .ap-block .box-small {
+  .delivery-block .box-small {
     padding: unset;
   }
-  .ap-block .order {
+  .delivery-block .order {
     flex-wrap: nowrap;
   }
 }
-
 @media (max-width: 470px) {
-  .ap-block {
+  .delivery-block {
     padding: 10% 10%;
   }
+
   .basket-line {
     flex-wrap: wrap;
   }
 }
-
 @media (max-width: 335px) {
-  .ap-block .title-font {
+  .delivery-block .title-font {
     font-size: 25px;
   }
-  .ap-block button {
+  .delivery-block button {
     width: 180px;
   }
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 
 .modal {
@@ -832,11 +770,9 @@ button {
   border: 1px solid;
   border-radius: 4px;
 }
-
 .modal-kit {
   display: none;
 }
-
 .modal-close {
   width: 50px;
   height: 50px;
@@ -851,17 +787,14 @@ button {
   transform: rotate(45deg);
   font-weight: bold;
 }
-
 .modal .detail-photo-img {
   width: 100%;
 }
-
 .modal input {
   padding: 5px;
   border: 1px solid;
   width: 100%;
 }
-
 .modal textarea {
   padding: 5px;
   border: 1px solid;
@@ -869,11 +802,13 @@ button {
   width: 100%;
   height: 100px;
 }
+.modal .pass-control {
+  top: 45%;
+}
 
 .category input, .categories input, .adm input {
   width: auto;
 }
-
 .category label, .categories label, .adm label {
   display: inline-flex;
   justify-content: center;
@@ -885,21 +820,18 @@ button {
     left: 7%;
   }
 }
-
 @media (max-width: 600px) {
   .modal {
     left: 10%;
     width: 480px;
   }
 }
-
 @media (max-width: 500px) {
   .modal {
     left: 10.5%;
     width: 380px;
   }
 }
-
 @media (max-width: 470px) {
   .modal {
     left: 11%;
@@ -913,7 +845,6 @@ button {
     flex-direction: column;
   }
 }
-
 @media (max-width: 385px) {
   .modal {
     width: 280px;
@@ -922,7 +853,6 @@ button {
     min-width: 270px;
   }
 }
-
 @media (width: 384px) {
   .modal {
     width: 300px;
@@ -931,7 +861,6 @@ button {
     min-width: 290px;
   }
 }
-
 @media (width: 376px) {
   .modal {
     left: 10%;
@@ -941,7 +870,6 @@ button {
     min-width: 290px;
   }
 }
-
 @media (max-width: 360px) {
   .modal {
     width: 250px;
@@ -950,38 +878,31 @@ button {
     min-width: 240px;
   }
 }
-
 .contacts {
   text-align: start;
   align-items: center;
   justify-content: space-between;
 }
-
 .contacts-address, .contacts-phone, .contacts-email {
   display: flex;
   white-space: nowrap;
   padding-bottom: 25px;
 }
-
 .contacts-address img, .contacts-phone img, .contacts-email img {
   width: 35px;
 }
-
 .contacts-info {
   align-items: center;
   padding-top: 25px;
 }
-
 .contacts-text {
   margin-left: 20px;
   font-size: 14px;
   font-style: normal;
 }
-
 .contacts-form {
   width: 50%;
 }
-
 .contacts-form select {
   background-color: white;
   width: 100%;
@@ -990,7 +911,6 @@ button {
   padding: 4px;
   border: 2px solid;
 }
-
 .contacts-form .input-text {
   width: 100%;
   height: 40px;
@@ -998,7 +918,6 @@ button {
   padding: 4px;
   border: 2px solid;
 }
-
 .contacts-form textarea {
   width: 100%;
   margin: 3px 0;
@@ -1006,7 +925,6 @@ button {
   height: 150px;
   border: 2px solid;
 }
-
 .contacts-form button {
   width: 100%;
   height: 50px;
@@ -1026,7 +944,6 @@ button {
     width: 100%;
   }
 }
-
 @media (max-width: 500px) {
   .contacts {
     flex-direction: column;
@@ -1035,28 +952,23 @@ button {
     width: 100%;
   }
 }
-
 @media (max-width: 335px) {
   .contacts-address {
     white-space: unset;
   }
 }
-
 .login div {
   flex-direction: column;
 }
-
 .login label {
   text-align: left;
   width: 30%;
 }
-
 .login input {
   padding: 15px;
   border: 2px solid;
   width: 100%;
 }
-
 .login button {
   padding: 15px;
   width: 100%;
@@ -1065,10 +977,9 @@ button {
 .pass {
   position: relative;
 }
-
 .pass-control {
   position: absolute;
-  top: 52.8%;
+  top: 52%;
   right: 10px;
   display: inline-block;
   width: 20px;
@@ -1076,7 +987,6 @@ button {
   cursor: pointer;
   background: url(../img/icons/no-view.svg) 0 0 no-repeat;
 }
-
 .pass-control.view {
   background: url(../img/icons/view.svg) 0 0 no-repeat;
 }
@@ -1086,13 +996,11 @@ button {
     width: 50%;
   }
 }
-
 @media (max-width: 500px) {
   .login label {
     width: 70%;
   }
 }
-
 .profile {
   text-align: start;
 }
@@ -1109,15 +1017,13 @@ button {
   white-space: nowrap;
   width: 250px;
 }
-
 .member input {
   padding: 5px;
   border: 1px solid;
   width: 100%;
 }
-
 .member .pass-control {
-  top: 4px;
+  top: 5px;
 }
 
 .user {
@@ -1126,7 +1032,7 @@ button {
   padding: 5px;
 }
 
-.admin-button, .tovars-edit, .users-edit, .tovars-new {
+.admin-button, .products-edit, .users-edit, .products-new {
   width: 135px;
   padding: 4px;
   border: 1px solid;
@@ -1140,27 +1046,23 @@ button {
   margin-top: 10px;
 }
 
-.tovars .admin-button {
+.products .admin-button {
   width: unset;
 }
-
-.tovars-new {
+.products-new {
   margin: 0 auto;
 }
 
 .users {
   border-bottom: 1px solid yellowgreen;
 }
-
 .users-info div:last-child {
   width: 75px;
   text-align: center;
 }
-
 .users-edit {
   width: unset;
 }
-
 .users .admin-button {
   width: unset;
 }
@@ -1177,16 +1079,17 @@ button {
   .d-cell {
     width: 100%;
   }
-  .profile .tovar, .profile .basket-line, .profile .basket {
+
+  .profile .product, .profile .basket-line, .profile .basket {
     flex-wrap: wrap;
   }
 }
-
 @media (max-width: 470px) {
   .users-info {
     flex-wrap: wrap;
   }
-  .tovars-edit {
+
+  .products-edit {
     margin-bottom: 10px;
   }
-}
+}/*# sourceMappingURL=styles.css.map */

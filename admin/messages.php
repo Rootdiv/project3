@@ -1,13 +1,8 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
   require_once PROJECT_ROOT.'/components/header.inc';
-  if(isset($_COOKIE['member_id']) === false){
-    header('Location: '.PROJECT_URL.'/auth/login.php');
-  }else{
-    require_once PROJECT_ROOT.'/components/menu_adm.inc';
-    if(!in_array($user_id, $root) && !in_array($user_id, $manager)){
-      header('Location: '.PROJECT_URL.'/errors/err403.php');
-    }else{ ?>
+  require_once PROJECT_ROOT.'/components/check_adm.inc';
+?>
         <main class="box-small">
           <div class="line"></div>
           <div class="profile">
@@ -58,7 +53,7 @@
                   </div>
                   <div class="flex-box">
                     <div>Телефон</div>
-                    <div class="box-small"></div><?=$item_msg['tel'].PHP_EOL?>
+                    <div class="box-small"></div><?=$item_msg['phone'].PHP_EOL?>
                   </div>
                   <div class="flex-box">
                     <div>Сообщение</div>
@@ -66,7 +61,7 @@
                   </div>
                   <form method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/delete.php">
                     <input hidden name="id" value="<?=$item_msg['id']?>">
-                    <input hidden name="tableID" value="7">
+                    <input hidden name="table_id" value="7">
                     <button class="admin-button" style="width: 150px">Удалить</button>
                   </form>
                   <div class="box-small"></div>
@@ -102,7 +97,6 @@
             <?php } echo PHP_EOL ?>
           <div>
         </main>
-    <?php } echo PHP_EOL;
-  }
+<?php
   require_once PROJECT_ROOT.'/components/footer.inc';
 ?>

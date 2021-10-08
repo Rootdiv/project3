@@ -31,7 +31,7 @@ if(!empty($_POST['login']) && !empty($_POST['email'])){
       $sql->bindParam(':email', $email);
       try{
         $sql->execute();
-        if(smtpmail($login, $email, 'Новый пароль', $message)) echo 'Пароль создан.';
+        if(smtpmail($login, $email, 'Новый пароль', $message)) echo 'Новый пароль сгенерирован.';
         else echo 'Письма нет, обратитесь к администрации для восстановления доступа.';
       }catch(PDOException $e){
         die('Подключение не удалось: '.$e->getMessage());

@@ -19,7 +19,7 @@ if(!empty($_POST['fio']) && !empty($_POST['email']) && !empty($_POST['email']) &
     }
   }
   if($message->createLine($arr_fields, $arr_values)){
-    echo 'Успешно';
+    echo 'Сообщение записано';
     $msg = 'пришло новое сообщения по обратной связи.';
     $subject = 'Новое сообщение';
     if(in_array(1, $arr_values)){
@@ -40,7 +40,7 @@ if(!empty($_POST['fio']) && !empty($_POST['email']) && !empty($_POST['email']) &
       }
     }
   }else{
-    echo 'Сообщение не отправлено';
+    echo 'Произошла ошибка';
   }
 }else{
   header('Location: '.PROJECT_URL.'/contacts.php');

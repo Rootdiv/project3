@@ -11,7 +11,7 @@
 
 .basket
   border-bottom: 1px solid rgba(0, 0, 0, 0.1)
-  &-block
+  &-title
     padding-bottom: 50px
     & > .title-mess
       font-size: 20px
@@ -24,6 +24,9 @@
       width: 95px
       &:last-child
         width: 65px
+    a
+      display: inline-block
+      width: 100%
   &-img
     padding: 50px
     justify-content: center
@@ -48,7 +51,7 @@
     @include num-arrow
     right: 0
     bottom: 0
-.kol
+.quantity
   border: none
   padding: 0
   width: 25px
@@ -61,7 +64,7 @@
   &::-webkit-inner-spin-button, &::-webkit-outer-spin-button
     -webkit-appearance: none
 
-.tovar
+.product
   text-align: start
   & > div:first-child
     padding-left: 5px
@@ -71,11 +74,11 @@
     img
       width: 100px
 
-.itogo
+.total
   background-color: whitesmoke
   padding: 20px 10px
 
-.ap-block
+.delivery-block
   background-color: whitesmoke
   padding: 10% 20%
   border: 2px solid rgba(0, 0, 0, 0.1)
@@ -117,14 +120,14 @@
     &:last-child
       text-align: left
 
-.oplata
+.payment
   & > label
     width: 100%
     text-align: left
     padding-top: unset
 
 @media (max-width: 768px)
-  .ap-block
+  .delivery-block
     label
       width: 100%
     div
@@ -134,12 +137,12 @@
     .order
       flex-wrap: nowrap
 @media (max-width: 470px)
-  .ap-block
+  .delivery-block
     padding: 10% 10%
   .basket-line
     flex-wrap: wrap
 @media (max-width: 335px)
-  .ap-block
+  .delivery-block
     .title-font
       font-size: 25px
     button

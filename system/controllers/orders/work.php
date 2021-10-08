@@ -10,7 +10,7 @@ if(!empty($_POST['id'])){
     $sql->execute();
     $order = 'Заказ №'.$id.' обрабатывает менеджер '.$username;
     file_get_contents(URL.'sendMessage?parse_mode=HTML&chat_id='.USER_TG.'&text='.$order);
-    header('Location: '.@$_SERVER['HTTP_REFERER']);
+    echo 'Заказ выполняется';
   }catch(PDOException $e){
     die('Подключение не удалось: '.$e->getMessage());
   }

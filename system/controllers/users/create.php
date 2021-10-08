@@ -6,14 +6,15 @@ if(!empty($_POST['login']) && !empty($_POST['email']) && !empty($_POST['username
   $arr_fields = [];
   $arr_values = [];
   $login = $_POST['login'];
+  $email = $_POST['email'];
   $new_user = new Member();
   $table = $new_user->setTable();
   $sql = $pdo->prepare("SELECT * FROM $table WHERE login=:login");
   $sql->bindParam(':login', $login);
   $sql->execute();
   $rows = $sql->fetch(PDO::FETCH_LAZY);
-  if(strcmp($rows['login'], $login) == 0 || strcmp($rows['login'], $login) == 1){
-    echo 'Аккаунт существует';
+  if(strcasecmp($rows['login'], $login) == 0 || strcasecmp($rows['email'], $email) == 0){
+    echo 'Аккаунт c указанным логином или e-mail адресом существует';
   }else{
     $name_columns_user = $new_user->getTableColumnsNames();
     $name_columns = array_splice($name_columns_user, 1, -3);

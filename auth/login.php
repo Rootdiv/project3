@@ -1,8 +1,9 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
   require_once PROJECT_ROOT.'/components/header.inc';
+  if(isset($_COOKIE['member_id'])) header('Location: '.PROJECT_URL.'/main.php');
 ?>
-        <main class="box-small" onclick="errUnset()">
+        <main class="box-small">
           <div class="line"></div>
           <div class="box-small"></div>
           <?php if(isset($_GET['reg']) == false){ echo PHP_EOL ?>
@@ -10,13 +11,13 @@
               <a href="<?=PROJECT_URL?>/main.php">Главная</a> / Авторизация
             </div>
             <div class="box-small"></div>
-            <form class="login" onsubmit="return validAuth()" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/auth.php">
+            <form class="login" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/auth.php">
               <div class="flex-box center size-font">
                 <label>Логин или E-mail<input type="text" name="login" required></label>
                 <div class="box-small"></div>
                 <label class="pass">Пароль
                   <input id="pass-input" type="password" name="password" required>
-                  <span class="pass-control" onclick="return showHidePass(this)"></span>
+                  <span class="pass-control"></span>
                 </label>
                 <div class="box"></div>
                 <label>
@@ -35,7 +36,7 @@
               <a href="<?=PROJECT_URL?>/main.php">Главная</a> / Регистрация
             </div>
             <div class="box-small"></div>
-            <form class="login" onsubmit="return validReg()" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/create.php">
+            <form class="login" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/create.php">
               <div class="flex-box center size-font">
                 <label>Логин<input type="text" name="login" autocomplete="off" required></label>
                 <div class="box-small"></div>
@@ -45,7 +46,7 @@
                 <div class="box-small"></div>
                 <label class="pass">Пароль
                   <input id="pass-input" type="password" name="password" autocomplete="off" required>
-                  <span class="pass-control" onclick="return showHidePass(this)"></span>
+                  <span class="pass-control"></span>
                 </label>
                 <div class="box"></div>
                 <label>
@@ -69,7 +70,7 @@
               почту.
             </div>
             <div class="box-small"></div>
-            <form class="login" onsubmit="return validRestore()" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/restore.php">
+            <form class="login" method="POST" action="<?=PROJECT_URL?>/system/controllers/users/restore.php">
               <div class="flex-box center size-font">
                 <label>Логин<input type="text" name="login" autocomplete="off" required></label>
                 <div class="box-small"></div>
