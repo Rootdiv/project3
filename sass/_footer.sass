@@ -1,0 +1,39 @@
+.footer
+  display: flex
+  justify-content: space-between
+  font-size: 12px
+  text-align: start
+  p
+    font-size: 17px
+    font-weight: bold
+    text-transform: uppercase
+  ul
+    list-style-type: none
+    padding: 0
+  li
+    line-height: 1.7
+
+.mobile
+  display: none
+
+.sots-seti
+  line-height: 1.7
+  & > p
+    margin-top: 13px
+  img
+    width: 30px
+    border: 1px solid
+    padding: 2px
+
+.space-small
+  padding: 2px
+
+@media (max-width: 600px)
+  .footer
+    flex-direction: column
+
+  .mobile
+    display: block
+@media (max-width: 470px)
+  .footer
+    font-size: 15px

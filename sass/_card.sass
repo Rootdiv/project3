@@ -1,0 +1,41 @@
+.detail
+  &-photo
+    background-color: whitesmoke
+    justify-content: center
+    &-img
+      width: 60%
+      height: 700px
+  &-title
+    font-size: 30px
+    padding-bottom: 5px
+  &-art
+    font-size: 12px
+  &-size
+    justify-content: center
+    &-item
+      border: 1px solid
+      padding: 5px
+
+.description
+  font-size: 14px
+
+.add-basket
+  text-decoration: none !important
+  border: 2px solid orange
+  width: max-content
+  padding: 15px 20px
+  background-color: orange
+  color: white
+
+@media (max-width: 920px)
+  .detail-photo-img
+    width: 100%
+@media (max-width: 650px)
+  .detail-art
+    font-size: unset
+
+  .description
+    font-size: unset
+@media (max-width: 335px)
+  .add-basket
+    padding: 10px

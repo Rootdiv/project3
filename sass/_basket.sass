@@ -1,0 +1,146 @@
+@mixin num-arrow
+  display: inline-block
+  cursor: pointer
+  color: white
+  background-color: black
+  width: 12px
+  height: 12px
+  line-height: 12px
+  font-size: 12px
+  position: absolute
+
+.basket
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1)
+  &-block
+    padding-bottom: 50px
+    & > .title-mess
+      font-size: 20px
+  & > .space
+    padding: 100px
+  &-line
+    text-align: center
+    align-items: center
+    div
+      width: 95px
+      &:last-child
+        width: 65px
+  &-img
+    padding: 50px
+    justify-content: center
+  &-price
+    color: orange
+
+#basket-set
+  text-align: start
+  & > div:nth-child(2n)
+    background-color: whitesmoke
+    .number:nth-child(2n)
+      background-color: whitesmoke
+
+.number
+  position: relative
+  margin-right: 20px
+  &-plus
+    @include num-arrow
+    top: 0
+    right: 0
+  &-minus
+    @include num-arrow
+    right: 0
+    bottom: 0
+.kol
+  border: none
+  padding: 0
+  width: 25px
+  height: 26px
+  margin: 0 20px 0 30px
+  text-align: right
+  font-size: 16px
+  background-color: inherit
+  -moz-appearance: textfield
+  &::-webkit-inner-spin-button, &::-webkit-outer-spin-button
+    -webkit-appearance: none
+
+.tovar
+  text-align: start
+  & > div:first-child
+    padding-left: 5px
+    width: 120px
+  &-photo
+    border: 1px solid rgba(0, 0, 0, 0.1)
+    img
+      width: 100px
+
+.itogo
+  background-color: whitesmoke
+  padding: 20px 10px
+
+.ap-block
+  background-color: whitesmoke
+  padding: 10% 20%
+  border: 2px solid rgba(0, 0, 0, 0.1)
+  label
+    text-align: start
+    width: 50%
+    text-transform: uppercase
+    padding-top: 40px
+  .label
+    width: 100%
+    text-align: start
+  input
+    margin-top: 10px
+    background-color: white
+    padding: 15px
+    width: 100%
+    border: 2px solid rgba(0, 0, 0, 0.1)
+  & > .title-mess
+    font-size: 20px
+    padding-bottom: 80px
+  select
+    margin-top: 10px
+    background-color: white
+    padding: 15px
+    width: 100%
+    border: 2px solid rgba(0, 0, 0, 0.1)
+  button
+    font-size: 14px
+    padding: 15px
+    width: 200px
+
+.order
+  div
+    width: 50%
+  div
+    &:first-child
+      text-align: right
+      margin-right: 15px
+    &:last-child
+      text-align: left
+
+.oplata
+  & > label
+    width: 100%
+    text-align: left
+    padding-top: unset
+
+@media (max-width: 768px)
+  .ap-block
+    label
+      width: 100%
+    div
+      flex-wrap: wrap
+    .box-small
+      padding: unset
+    .order
+      flex-wrap: nowrap
+@media (max-width: 470px)
+  .ap-block
+    padding: 10% 10%
+  .basket-line
+    flex-wrap: wrap
+@media (max-width: 335px)
+  .ap-block
+    .title-font
+      font-size: 25px
+    button
+      width: 180px

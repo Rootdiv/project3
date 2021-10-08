@@ -1,0 +1,107 @@
+//Общие стили
+.box
+  padding: 20px
+  &-small
+    padding: 10px
+
+.bg-fix
+  background-size: cover
+  background-repeat: no-repeat
+  background-position: center center
+
+.flex
+  &-box
+    display: flex
+  &-wrap
+    flex-wrap: wrap
+
+a
+  text-decoration: none
+  color: black
+  &:hover
+    text-decoration: underline
+
+.new-font
+  font-family: 'Times New Roman', Times, serif
+  font-style: italic
+
+.big-font
+  text-transform: uppercase
+
+.line
+  padding: 1px
+  background: rgba(0, 0, 0, 0.1)
+
+.space
+  padding: 70px
+  &-min
+    padding: 50px
+
+.title
+  &-font
+    font-size: 35px
+  &-pad
+    padding-bottom: 5px
+
+.size-font
+  font-size: 20px
+
+.center
+  align-items: center
+
+button
+  border: 2px solid orange
+  background-color: orange
+  cursor: pointer
+  color: white
+
+.go-top
+  opacity: 0
+  transition: opacity 1500ms
+  position: fixed
+  bottom: 50px
+  right: 50px
+  width: 40px
+  height: 40px
+  border-radius: 50%
+  cursor: pointer
+  color: white
+  background-color: black
+  text-align: center
+  font-size: 30px
+  z-index: 10
+
+.global-container
+  max-width: 1556px
+  margin: 0 auto
+  background-color: whitesmoke
+  padding: 62px 8.2%
+
+.container
+  background-color: white
+  text-align: center
+
+.menu
+  text-align: start
+
+.about
+  text-align: start
+  text-indent: 25px
+
+.msg
+  color: green
+  font-style: italic
+  &-error
+    color: red
+
+.error
+  a
+    text-decoration: underline
+
+@media (max-width: 920px)
+  .go-top
+    right: 20px
+
+@media (max-width: 650px)
+  .global-container
+    padding: 62px 5px

@@ -1,0 +1,84 @@
+.header
+  display: flex
+  align-items: center
+  justify-content: space-between
+  position: relative
+
+.top-nav
+  display: flex
+  align-items: center
+  font-size: 12px
+  flex-grow: 1
+  ul
+    list-style-type: none
+    padding-left: 32px
+    li
+      display: inline-block
+      &:not(:last-child)
+        padding-right: 24px
+      &:last-child
+        padding-right: 12px
+
+.to-end
+  margin: 0 0 0 auto
+  img
+    vertical-align: middle
+    margin-left: -5px
+
+.logo-mobile
+  display: none
+
+/*Мобильное меню*/
+@media (max-width: 860px)
+  .top-nav
+    ul
+      li
+        &:not(:last-child)
+          padding-right: 10px
+@media (max-width: 770px)
+  .logo-mobile
+    cursor: pointer
+    display: flex
+    width: 62px
+    height: 62px
+    align-items: center
+    justify-content: space-between
+    flex-direction: column
+    span
+      width: 100%
+      height: 8px
+      border-radius: 4px
+      background-color: black
+    img
+      width: 55px
+
+  .top-nav
+    position: absolute
+    top: 65px
+    right: 10px
+    display: flex
+    flex-direction: column
+    background-color: white
+    box-shadow: 0 0 5px 5px gainsboro
+    .to-end
+      margin: unset
+    ul
+      padding-left: 5px
+      margin: 0
+      li
+        display: list-item
+
+  .menu
+    &-mobile
+      font-size: 15px
+      min-width: 180px
+      text-align: start
+      align-items: flex-start
+      &-hidden
+        display: none
+    ul
+      margin-block-start: 2px
+      margin-block-end: 2px
+      li
+        padding: 2px
+        white-space: nowrap

@@ -1,0 +1,48 @@
+.admin-button, .tovars-edit, .users-edit, .tovars-new
+  width: 135px
+  padding: 4px
+  border: 1px solid
+  cursor: pointer
+  color: unset
+  text-align: center
+  background-color: lightgrey
+
+.orders, .messages
+  .admin-button
+    margin-top: 10px
+
+.tovars
+  .admin-button
+    width: unset
+  &-new
+    margin: 0 auto
+
+.users
+  border-bottom: 1px solid yellowgreen
+  &-info
+    div
+      &:last-child
+        width: 75px
+        text-align: center
+  &-edit
+    width: unset
+  .admin-button
+    width: unset
+
+#edit div
+  padding-bottom: 5px
+
+.messages
+  padding-right: 20px
+
+@media (max-width: 500px)
+  .d-cell
+    width: 100%
+
+  .profile .tovar, .profile .basket-line, .profile .basket
+    flex-wrap: wrap
+@media (max-width: 470px)
+  .users-info
+    flex-wrap: wrap
+  .tovars-edit
+    margin-bottom: 10px
