@@ -1,10 +1,10 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-require_once PROJECT_ROOT.'/components/header.inc';
+require_once PROJECT_ROOT.'/components/header.inc.php';
 if(isset($_COOKIE['member_id']) === false){
   header('Location: '.PROJECT_URL.'/auth/login.php');
 }else{
-  require_once PROJECT_ROOT.'/components/menu_adm.inc'; ?>
+  require_once PROJECT_ROOT.'/components/menu_adm.inc.php'; ?>
         <main class="box-small">
           <div class="line"></div>
         <?php if(isset($_GET['history']) == null){
@@ -175,5 +175,5 @@ if(isset($_COOKIE['member_id']) === false){
           <div class="box-small"></div>
         </main>
 <?php }
-  require_once PROJECT_ROOT.'/components/footer.inc';
+  require_once PROJECT_ROOT.'/components/footer.inc.php';
 ?>

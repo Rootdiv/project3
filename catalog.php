@@ -1,6 +1,6 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc';
+  require_once PROJECT_ROOT.'/components/header.inc.php';
   if(isset($_GET['routed'])){
     $get_line = '';
     foreach($_GET as $key => $value){
@@ -153,5 +153,5 @@
           </div>
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc';
+  require_once PROJECT_ROOT.'/components/footer.inc.php';
 ?>

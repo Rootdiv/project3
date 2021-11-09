@@ -6,7 +6,7 @@ if(!empty($_POST['fio']) && !empty($_POST['email']) && !empty($_POST['email']) &
   if(form_valid($_POST) === false){
     exit;
   }
-  require_once PROJECT_ROOT.'/components/menu_adm.inc';
+  require_once PROJECT_ROOT.'/components/menu_adm.inc.php';
   $arr_fields = [];
   $arr_values = [];
   $message = new Feedback(0);

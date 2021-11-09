@@ -1,6 +1,6 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/components/menu_adm.inc';
+  require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/components/menu_adm.inc.php';
   if(isset($_GET['id']) === false && isset($_GET['user']) === false && isset($_GET['product']) === false){
     header('Location: '.PROJECT_URL);
   }elseif((int)$_GET['id'] !== 0 && isset($_GET['product']) === false && isset($_GET['user']) === false){

@@ -1,6 +1,6 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc';
+  require_once PROJECT_ROOT.'/components/header.inc.php';
   if(isset($_COOKIE['member_id'])) header('Location: '.PROJECT_URL.'/main.php');
 ?>
         <main class="box-small">
@@ -90,5 +90,5 @@
           <div class="box-small"></div>
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc';
+  require_once PROJECT_ROOT.'/components/footer.inc.php';
 ?>

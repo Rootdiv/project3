@@ -6,7 +6,7 @@ if(isset($_SESSION['basket']) == false || isset($_SESSION['basket']) == null){
   header('Location: '.PROJECT_URL.'/basket.php');
 }else{
   if(form_valid($_POST) === false) exit;
-  require_once PROJECT_ROOT.'/components/menu_adm.inc';
+  require_once PROJECT_ROOT.'/components/menu_adm.inc.php';
   $all_goods = $_SESSION['basket'];
   foreach($all_goods as $elem){
     $item = new Goods($elem);

@@ -1,14 +1,14 @@
 <?php
   require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc';
-  require_once PROJECT_ROOT.'/components/check_adm.inc';
+  require_once PROJECT_ROOT.'/components/header.inc.php';
+  require_once PROJECT_ROOT.'/components/check_adm.inc.php';
       if(!isset($_GET['orders'])) header('Location: '.PROJECT_URL.'/admin/orders.php?orders=act&page_num=1'); ?>
         <main class="box-small">
           <div class="line"></div>
           <div class="profile">
             <?=$menu?>
             <div class="line"></div>
-            <?php require_once PROJECT_ROOT.'/components/orders_adm.inc';
+            <?php require_once PROJECT_ROOT.'/components/orders_adm.inc.php';
             if(in_array($user_id, $manager)) $orders = ''; //Скрываем меню админа для менеджера
             echo $orders; // Меню админа скрытое для менеджера
             $sql_orders->execute();
@@ -149,5 +149,5 @@
           </div>
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc';
+  require_once PROJECT_ROOT.'/components/footer.inc.php';
 ?>
