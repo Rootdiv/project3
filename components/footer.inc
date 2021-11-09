@@ -60,6 +60,5 @@
         </footer>
       </div>
     </div>
-    <script src="<?=PROJECT_URL?>/js/script.js"></script>
   </body>
 </html>

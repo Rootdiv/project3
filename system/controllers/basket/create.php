@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET['id'])){
+if(isset($_GET['id']) && !empty($_GET['id'])){
   session_start();
   $id = (int)$_GET['id'];
   $basket = @$_SESSION['basket'];
@@ -9,7 +9,7 @@ if(isset($_GET['id'])){
   }
 
   $_SESSION['basket'] = $basket;
-  header('Location: '.@$_SERVER['HTTP_REFERER']);
+  header('Location: '.$_SERVER['HTTP_REFERER']);
 }else{
-  header('Location: '.@$_SERVER['HTTP_REFERER']);
+  header('HTTP/1.0 403 Forbidden');
 }

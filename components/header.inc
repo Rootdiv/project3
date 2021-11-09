@@ -37,6 +37,7 @@
     <link rel="shortcut icon" href="<?=PROJECT_URL?>/img/icons/favicon.ico" type="image/x-icon">
     <title>Проект 3. <?=$title?></title>
     <link rel="stylesheet" type="text/css" href="<?=PROJECT_URL?>/css/styles.css">
+    <script type="module" src="<?=PROJECT_URL?>/js/index.js"></script>
   </head>
   <body>
     <div class="go-top">

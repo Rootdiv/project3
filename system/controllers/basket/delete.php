@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET['id'])){
+if(isset($_GET['id']) && !empty($_GET['id'])){
   session_start();
   //Удаляем товар
   $id = (int)$_GET['id'];
@@ -20,5 +20,5 @@ if(isset($_GET['id'])){
   }
   $_SESSION['basket'] = $basket;
 }else{
-  header('Location: '.@$_SERVER['HTTP_REFERER']);
+  header('HTTP/1.0 403 Forbidden');
 }
