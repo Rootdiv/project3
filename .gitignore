@@ -1,4 +1,6 @@
-/.vscode/
+.vscode/
+node_modules/
+uploads/catalog/**
 global_pass.php
 config_mail.php
-
+*.map

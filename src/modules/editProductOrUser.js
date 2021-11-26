@@ -10,11 +10,11 @@ const editProductOrUser = () => {
     profile.addEventListener('click', (event) => {
       const target = event.target;
       if (target.matches('.products-edit')) {
-        modalShow(target, url, '&product=edit&user=false');
+        modalShow(target, url, '&product=edit');
       } else if (target.matches('.products-new')) {
-        modalShow(target, url, '&product=new&user=false');
+        modalShow(target, url, '&product=new');
       } else if (target.matches('.users-edit')) {
-        modalShow(target, url, '&user=edit&product=false');
+        modalShow(target, url, '&user=edit');
       } else if (target.matches('.modal-close')) {
         modalKit.style.display = 'none';
       } else if (target.matches('.overlay')) {

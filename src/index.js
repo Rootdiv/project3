@@ -1,4 +1,7 @@
+//Компиляция Sass и подключение JS-модулей через Webpack
 'use strict';
+
+import './sass/styles.sass'
 
 import arrowTop from './modules/arrowTop.js'
 import menu from './modules/menu.js'

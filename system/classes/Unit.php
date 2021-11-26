@@ -2,10 +2,10 @@
 abstract class Unit implements UnitActions {
   public $bdata; //Кэш запроса
   protected $pdo;
-  protected ?int $id;
+  protected  ? int $id;
 
   /*конструктор, подключающийся к базе данных*/
-  public function __construct(int $id = null){
+  public function __construct(int $id = null) {
     $this->id = $id;
     $this->pdo = Connect::getInstance()->getConnection();
   }
@@ -13,9 +13,9 @@ abstract class Unit implements UnitActions {
   abstract public function setTable();
 
   //Метод для получения строки из таблицы БД
-  public function getLine(){
-    if(!$this->bdata){
-      $sql = $this->pdo->prepare("SELECT * FROM ".$this->setTable()." WHERE id='".$this->id."'");
+  public function getLine() {
+    if (!$this->bdata) {
+      $sql = $this->pdo->prepare("SELECT * FROM " . $this->setTable() . " WHERE id='" . $this->id . "'");
       $sql->execute();
       $this->bdata = $sql->fetch(PDO::FETCH_LAZY);
     }
@@ -23,56 +23,56 @@ abstract class Unit implements UnitActions {
   }
 
   //Метод для получения поля из строки в таблице БД
-  public function getField($field){
+  public function getField($field) {
     return trim($this->getLine()->$field);
   }
 
   //Метод для создания строки в таблице БД
-  public function createLine($fields_array, $values_array){
+  public function createLine($fields_array, $values_array) {
     $fields_str = implode(',', $fields_array);
     $placeholders_str = '';
-    foreach ($fields_array as $key => $value){
+    foreach ($fields_array as $key => $value) {
       $placeholders_str .= ":$value,";
     }
-    $sql = $this->pdo->prepare("INSERT INTO ".$this->setTable()."($fields_str)VALUES(".trim($placeholders_str, ',').") ");
-    foreach ($fields_array as $key => $value){
+    $sql = $this->pdo->prepare("INSERT INTO " . $this->setTable() . "($fields_str)VALUES(" . trim($placeholders_str, ',') . ") ");
+    foreach ($fields_array as $key => $value) {
       $sql->bindParam(":$fields_array[$key]", $values_array[$key]);
     }
-    try{
+    try {
       $sql->execute();
       $this->id = $this->pdo->lastInsertId();
       return $this->id;
-    }catch (PDOException $e){
-      echo 'Подключение не удалось: '.$e->getMessage();
+    } catch (PDOException $e) {
+      echo 'Подключение не удалось: ' . $e->getMessage();
     }
     return 0;
   }
 
   //Метод обновления строки в таблице БД
-  public function updateLine($fields_array, $values_array){
+  public function updateLine($fields_array, $values_array) {
     $update_str = '';
-    foreach ($fields_array as $key => $value){
+    foreach ($fields_array as $key => $value) {
       $update_str .= "$value=:$value,";
     }
-    $sql = $this->pdo->prepare("UPDATE ".$this->setTable()." SET ".trim($update_str, ',')."  WHERE id='".$this->id."'");
+    $sql = $this->pdo->prepare("UPDATE " . $this->setTable() . " SET " . trim($update_str, ',') . "  WHERE id='" . $this->id . "'");
     foreach ($fields_array as $key => $value) {
       $sql->bindParam(":$value", $values_array[$key]);
     }
-    try{
+    try {
       $sql->execute();
       return $this->getField('id');
-    }catch (PDOException $e){
-      echo 'Подключение не удалось: '.$e->getMessage();
+    } catch (PDOException $e) {
+      echo 'Подключение не удалось: ' . $e->getMessage();
     }
     return 0;
   }
 
   //Метод обновления поля в строке в таблицы БД
-  public function updateField($field, $param){
-    $sql = $this->pdo->prepare("UPDATE ".$this->setTable()." SET $field=:param WHERE id=:id");
+  public function updateField($field, $param) {
+    $sql = $this->pdo->prepare("UPDATE " . $this->setTable() . " SET $field=:param WHERE id=:id");
     $sql->bindParam(':param', $param);
     $sql->bindParam(':id', $this->id);
-    if(in_array($field, $this->getTableColumnsNames())){
+    if (in_array($field, $this->getTableColumnsNames())) {
       if ($sql->execute()) {
         return true;
       }
@@ -81,37 +81,37 @@ abstract class Unit implements UnitActions {
   }
 
   //Метод удаления строки из таблицы БД
-  public function deleteLine(){
-    $sql = $this->pdo->prepare("DELETE FROM ".$this->setTable()." WHERE id=:id");
+  public function deleteLine() {
+    $sql = $this->pdo->prepare("DELETE FROM " . $this->setTable() . " WHERE id=:id");
     $sql->bindParam(':id', $this->id);
-    try{
+    try {
       $post_id = $this->getField('id');
       $sql->execute();
       return $post_id;
-    }catch (PDOException $e){
-      echo 'Подключение не удалось: '.$e->getMessage();
+    } catch (PDOException $e) {
+      echo 'Подключение не удалось: ' . $e->getMessage();
     }
     return 0;
   }
 
   //Метод "мягкого" удаления строки из таблицы БД (при больших нагрузках)
-  public function softDelete(){
+  public function softDelete() {
     $post_id = $this->getField('id');
-    if($this->updateField('deleted', 1)){
+    if ($this->updateField('deleted', 1)) {
       return $post_id;
     }
     return 0;
   }
 
   //Метод для получения всех столбцов в таблице БД
-  public function getTableColumns(){
-    $columns_sql = $this->pdo->prepare("SHOW COLUMNS FROM ".$this->setTable()."");
+  public function getTableColumns() {
+    $columns_sql = $this->pdo->prepare("SHOW COLUMNS FROM " . $this->setTable() . "");
     $columns_sql->execute();
     return $columns_sql->fetchAll();
   }
 
   //Метод для получения имен всех столбцов в таблице БД
-  public function getTableColumnsNames(){
+  public function getTableColumnsNames() {
     $par_arr = [];
     foreach ($this->getTableColumns() as $column) {
       $par_arr[$column['Field']] = $column['Field'];
@@ -120,7 +120,7 @@ abstract class Unit implements UnitActions {
   }
 
   //Метод для проверки есть ли поле в таблице БД
-  public function hasField($field_name){
+  public function hasField($field_name) {
     if (in_array($field_name, $this->getTableColumnsNames())) {
       return true;
     }
@@ -128,8 +128,8 @@ abstract class Unit implements UnitActions {
   }
 
   //Метод для получения всех строк в таблице БД
-  public function getAllUnits(){
-    $sql = $this->pdo->prepare("SELECT * FROM ".$this->setTable());
+  public function getAllUnits() {
+    $sql = $this->pdo->prepare("SELECT * FROM " . $this->setTable());
     $sql->execute();
     return $sql->fetchAll();
   }

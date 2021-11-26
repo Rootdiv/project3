@@ -61,9 +61,9 @@ const validForm = () => {
     if (!mailValid.test(target.value) || target.value.trim() === '') {
       if (target.closest('[name="scribe"]')) {
         //Параметры уведомления об ошибке на главной странице
-        target.closest('[name="scribe"]').insertAdjacentElement('beforeend', errorDiv);
-        errorDiv.classList.add('msg-error', 'size-font', 'box');
+        errorDiv.className = 'msg-error box';
         errorDiv.textContent = 'Некорректный e-mail. Попробуйте ещё раз';
+        target.closest('[name="scribe"]').insertAdjacentElement('beforeend', errorDiv);
       } else {
         errorValid(target);
       }
@@ -207,7 +207,7 @@ const validForm = () => {
   //Вешаем слушатель по клику на form и внутри вешаем слушатель на нужный input с вызовом соответствущей функции
   document.body.addEventListener('click', (event) => {
     const target = event.target;
-    if (target.matches('[name*="name"]') || target.matches('[name="city"]') || target.matches('[name="fio"]') ||
+    if (target.matches('[name*="name"]') || target.matches('[name="city"]') || target.matches('[name="full_name"]') ||
       target.matches('[name="title"]')) {
       target.addEventListener('input', formNamedInput);
       target.addEventListener('blur', formNamedBlur);

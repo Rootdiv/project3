@@ -1,20 +1,15 @@
 <?php
-  require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc.php';
-  require_once PROJECT_ROOT.'/components/check_adm.inc.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/project/project3/global_pass.php';
+  require_once PROJECT_ROOT . '/components/header.inc.php';
+  require_once PROJECT_ROOT . '/components/check_adm.inc.php';
+  $count = $pdo->query("SELECT COUNT(*) FROM core_goods")->fetchColumn();
+  require_once PROJECT_ROOT . '/components/pagination.inc.php';
+  $sql = $pdo->prepare("SELECT * FROM core_goods WHERE id>0 LIMIT $per_page OFFSET $list");
 ?>
         <main class="box-small">
           <div class="line"></div>
-          <?php //Пагинация на странице редактирования товаров
-          $count_product = $pdo->query("SELECT COUNT(*) FROM core_goods")->fetchColumn();
-          $total_page = ceil($count_product / $per_page);
-          if($page_num > $total_page) $page_num = $total_page; //Если значение $page_num большем чем страниц, то выводим последнюю страницу
-          if($count_product == 0) $from_num = 1;
-          else $from_num = ($page_num - 1) * $per_page;
-          $sql = $pdo->prepare("SELECT * FROM core_goods WHERE id>0 LIMIT $from_num, $per_page");
-          echo PHP_EOL ?>
           <div class="profile">
-            <?=$menu?>
+            <?=$menu;?>
             <div class="line"></div>
             <div class="box-small">
               <div class="products-new" data-id="0">
@@ -36,47 +31,42 @@
             </div>
             <div class="line"></div>
             <?php $sql->execute();
-            while($item = $sql->fetch(PDO::FETCH_LAZY)){
-              ?><div class="products basket flex-box box-small center">
+            $items = $sql->fetchAll();
+            foreach ($items as $item) {?>
+            <div class="products basket flex-box box-small center">
               <div class="flex-box center">
                 <div class="product-photo">
-                  <img src="<?=PROJECT_URL.$item['photo']?>" alt="Фото" />
+                  <img src="<?=PROJECT_URL . $item['photo'];?>" alt="Фото" />
                 </div>
                 <div class="box-small"></div>
-                <div>
-                  <div class="big-font"><b><?=$item['title']?></b></div>
-                  <div>арт. <?=$item['article']?></div>
+                <div class="product-info">
+                  <div class="big-font"><b><?=$item['title'];?></b></div>
+                  <div>арт. <?=$item['article'];?></div>
                   <div class="box-small"></div>
-                  <div class="products-edit" data-id="<?=$item['id']?>">
+                  <div class="products-edit" data-id="<?=$item['id'];?>">
                     Редактировать
                   </div>
                 </div>
               </div>
               <div class="basket-line center flex-box to-end">
                 <div>
-                  <?=$item['sized'].PHP_EOL?>
+                  <?=$item['sized'];?>
                 </div>
                 <div class="price">
-                  <?=$item['price'].PHP_EOL?>
+                  <?=$item['price'];?>
                 </div>
                 <div>
-                  <form method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/delete.php">
-                    <input hidden name="id" value="<?=$item['id']?>">
-                    <input hidden name="table_id" value="1">
+                  <form method="POST" action="<?=PROJECT_URL;?>/system/controllers/posts/delete.php">
+                    <input hidden name="id" value="<?=$item['id'];?>" />
+                    <input hidden name="table_id" value="1" />
                     <button class="admin-button">Удалить</button>
                   </form>
                 </div>
               </div>
-              </div>
-            <?php }
-            ?><div class="page-num flex-box flex-wrap box-small">
-              <?php for($i = 1; $i <= $total_page; $i++){ //Пагинация на странице редактирования товаров
-                if($i == $page_num){ echo PHP_EOL ?>
-              <a class="pagination-active" href="<?=PROJECT_URL?>/admin/goods.php?page_num=<?=$i?>"><?=$i?></a>
-                <?php }else{ echo PHP_EOL ?>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/goods.php?page_num=<?=$i?>"><?=$i?></a>
-                <?php } ?>
-              <?php } echo PHP_EOL ?>
+            </div>
+            <?php }?>
+            <div class="page-num flex-box flex-wrap box-small">
+              <?php paginationNoArrow('admin/' . $filename, $total_page, $page_num);?>
             </div>
             <div id="modal-kit" class="modal-kit">
               <div class="overlay"></div>
@@ -87,5 +77,5 @@
           </div>
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc.php';
+  require_once PROJECT_ROOT . '/components/footer.inc.php';
 ?>

@@ -22,13 +22,14 @@ const modalShow = (target, url, set = '') => {
     modalKit.style.display = 'block';
     modal.innerHTML = response;
   }).catch(error => console.error(error));
+
+  if (modalKit) {
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Escape') {
+        modalKit.style.display = 'none';
+      }
+    });
+  }
 };
-if (document.getElementById('modal-kit')) {
-  document.addEventListener('keydown', (event) => {
-    if (event.code === 'Escape') {
-      document.getElementById('modal-kit').style.display = 'none';
-    }
-  });
-}
 
 export default modalShow;

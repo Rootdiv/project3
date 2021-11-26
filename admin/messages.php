@@ -1,102 +1,70 @@
 <?php
-  require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc.php';
-  require_once PROJECT_ROOT.'/components/check_adm.inc.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/project/project3/global_pass.php';
+  require_once PROJECT_ROOT . '/components/header.inc.php';
+  require_once PROJECT_ROOT . '/components/check_adm.inc.php';
+  $count = $pdo->query("SELECT COUNT(*) FROM feedback WHERE id>0 AND $adm_msg")->fetchColumn();
+  require_once PROJECT_ROOT . '/components/pagination.inc.php';
+  $sql = $pdo->prepare("SELECT * FROM feedback WHERE id>0 AND $adm_msg LIMIT $per_page OFFSET $list");
 ?>
         <main class="box-small">
           <div class="line"></div>
           <div class="profile">
-            <?=$menu?>
+            <?=$menu;?>
             <div class="line"></div>
             <?php echo $adm_msg_menu; // Меню админа скрытое для менеджера
-            $count_msg = $pdo->query("SELECT COUNT(*) FROM feedback WHERE id>0 AND $adm_msg")->fetchColumn();
-            $limit = 2;
-            $total_page = ceil($count_msg / $per_page);
-            $total_page++; //увеличиваем число страниц на единицу чтобы начальное значение было равно единице, а не нулю.
-            if($page_num > $total_page){ //Если значение $page_num большем чем страниц, то выводим последнюю страницу
-              $page_num = $total_page - 1;
-            }
-            if(!isset($list)) $list = 0; //Указываем начало вывода данных
-            $list = --$page_num * $per_page;
-            $sql_msg = $pdo->prepare("SELECT * FROM feedback WHERE id>0 AND $adm_msg LIMIT $per_page OFFSET $list");
-            $sql_msg->execute();
-            $rows = $sql_msg->fetch(PDO::FETCH_LAZY);
-            if(isset($rows['id']) !== false){
-              echo PHP_EOL ?>
-            <div class="box-small">
-              <?php $i = 0;
-              $sql_msg->execute();
-              while($item_msg = $sql_msg->fetch(PDO::FETCH_LAZY)){
-                ++$i;
-                if(($i % 2) == 1) echo '<div class="d-row">'."\t";
-                echo '<div class="d-cell">';
-                $text = str_replace(PHP_EOL, '<br>', $item_msg['text']);
-                if($item_msg['adm_msg'] == 1) $msg_from = 'Администрация';
-                elseif($item_msg['adm_msg'] == 2) $msg_from = 'Менеджеры';
-                echo PHP_EOL ?>
-                <div class="messages">
-                  <div class="flex-box">
-                    <div>Сообщение &#8470;</div>
-                    <div class="box-small"></div><?=$item_msg['id'].PHP_EOL?>
-                  </div>
-                  <div class="flex-box">
-                    <div>Адресат</div>
-                    <div class="box-small"></div><?=$msg_from.PHP_EOL?>
-                  </div>
-                  <div class="flex-box">
-                    <div>ФИО</div>
-                    <div class="box-small"></div><?=$item_msg['fio'].PHP_EOL?>
-                  </div>
-                  <div class="flex-box">
-                    <div>E-mail</div>
-                    <div class="box-small"></div><?=$item_msg['email'].PHP_EOL?>
-                  </div>
-                  <div class="flex-box">
-                    <div>Телефон</div>
-                    <div class="box-small"></div><?=$item_msg['phone'].PHP_EOL?>
-                  </div>
-                  <div class="flex-box">
-                    <div>Сообщение</div>
-                    <div class="box-small"></div><?=$text.PHP_EOL?>
-                  </div>
-                  <form method="POST" action="<?=PROJECT_URL?>/system/controllers/posts/delete.php">
-                    <input hidden name="id" value="<?=$item_msg['id']?>">
-                    <input hidden name="table_id" value="7">
-                    <button class="admin-button" style="width: 150px">Удалить</button>
-                  </form>
-                  <div class="box-small"></div>
+            $sql->execute();
+            $items = $sql->fetchAll();
+            if (empty($items)) {
+              echo '<div class="box-small">Сообщений нет</div>';
+            }?>
+            <div class="box-small flex-box flex-wrap">
+              <?php foreach ($items as $item_msg) {
+              $text = str_replace(PHP_EOL, '<br>', $item_msg['text']);
+              if ($item_msg['adm_msg'] == 1) {
+                $msg_from = 'Администрация';
+              } elseif ($item_msg['adm_msg'] == 2) {
+                $msg_from = 'Менеджеры';
+              }?>
+              <div class="messages">
+                <div class="flex-box">
+                  <div class="field">Сообщение &#8470;</div>
+                  <div><?=$item_msg['id'];?></div>
                 </div>
-                <?php echo (!($i % 2) || $i == $count_msg) ? '</div> </div>' : '</div>';
-              } echo PHP_EOL ?>
+                <div class="flex-box">
+                  <div class="field">Адресат</div>
+                  <div><?=$msg_from;?></div>
+                </div>
+                <div class="flex-box">
+                  <div class="field">ФИО</div>
+                  <div><?=$item_msg['full_name'];?></div>
+                </div>
+                <div class="flex-box">
+                  <div class="field">E-mail</div>
+                  <div><?=$item_msg['email'];?></div>
+                </div>
+                <div class="flex-box">
+                  <div class="field">Телефон</div>
+                  <div><?=$item_msg['phone'];?></div>
+                </div>
+                <div class="flex-box">
+                  <div class="field">Сообщение</div>
+                  <div><?=$text;?></div>
+                </div>
+                <form method="POST" action="<?=PROJECT_URL;?>/system/controllers/posts/delete.php">
+                  <input hidden name="id" value="<?=$item_msg['id'];?>" />
+                  <input hidden name="table_id" value="7" />
+                  <button class="admin-button">Удалить</button>
+                </form>
+              </div>
+              <!-- /.message -->
+              <?php }?>
             </div>
             <div class="page-num flex-box flex-wrap box">
-              <?php if($page_num >= 1){ echo PHP_EOL ?>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=1"> <<</a>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=<?=$page_num?>"> <</a>
-              <?php } //Пагинация на странице истории заказов пользователя
-              $start = $page_num + 1 - $limit;
-              $end = $page_num + 1 + $limit;
-              for($i = 1; $i < $total_page; $i++){
-                if($i >= $start && $i <= $end){
-                  if($i == $page_num + 1){ echo PHP_EOL ?>
-              <a class="pagination-active" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=<?=$i?>"><?=$i?></a>
-                  <?php }else{ echo PHP_EOL ?>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=<?=$i?>"><?=$i?></a>
-                  <?php } ?>
-                <?php }
-              }
-              if($i > $page_num && ($page_num + 2) < $i){ echo PHP_EOL ?>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=<?=($page_num + 2)?>"> > </a>
-              <a class="pagination" href="<?=PROJECT_URL?>/admin/messages.php?<?=$adm?>page_num=<?=($i - 1)?>"> >> </a>
-              <?php } echo PHP_EOL ?>
+              <?php paginationArrow('admin/' . $filename, $total_page, $page_num, $per_page, $adm);?>
             </div>
-            <?php }else{ echo PHP_EOL ?>
-            <div class="box">
-              Сообщений нет
-            </div>
-            <?php } echo PHP_EOL ?>
           <div>
+          <!-- /.profile -->
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc.php';
+  require_once PROJECT_ROOT . '/components/footer.inc.php';
 ?>

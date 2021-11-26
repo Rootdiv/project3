@@ -4,23 +4,22 @@
               <?php $count_f = $pdo->query('SELECT COUNT(*) FROM core_goods WHERE id>0 AND category=1')->fetchColumn();
               $count_m = $pdo->query('SELECT COUNT(*) FROM core_goods WHERE id>0 AND category=2')->fetchColumn();
               $count_ch = $pdo->query('SELECT COUNT(*) FROM core_goods WHERE id>0 AND category=3')->fetchColumn();
-              $count_n = $pdo->query('SELECT COUNT(*) FROM core_goods WHERE id>0')->fetchColumn(); ?>
-
+              $count_n = $pdo->query('SELECT COUNT(*) FROM core_goods WHERE id>0')->fetchColumn();?>
             </div>
             <div class="footer-category">
               <p>Коллекции</p>
               <ul>
                 <li>
-                  <a href="<?=PROJECT_URL?>/catalog.php?category=1&page_num=1">Женщинам (<?=$count_f?>)</a>
+                  <a href="<?=PROJECT_URL;?>/catalog.php?category=1&page_num=1">Женщинам (<?=$count_f;?>)</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/catalog.php?category=2&page_num=1">Мужчинам (<?=$count_m?>)</a>
+                  <a href="<?=PROJECT_URL;?>/catalog.php?category=2&page_num=1">Мужчинам (<?=$count_m;?>)</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/catalog.php?category=3&page_num=1">Детям (<?=$count_ch?>)</a>
+                  <a href="<?=PROJECT_URL;?>/catalog.php?category=3&page_num=1">Детям (<?=$count_ch;?>)</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/catalog.php?page_num=1">Новинки (<?=$count_n?>)</a>
+                  <a href="<?=PROJECT_URL;?>/catalog.php?page_num=1">Новинки (<?=$count_n;?>)</a>
                 </li>
               </ul>
             </div>
@@ -29,31 +28,32 @@
               <p>Магазин</p>
               <ul>
                 <li>
-                  <a href="<?=PROJECT_URL?>/about.php">О нас</a>
+                  <a href="<?=PROJECT_URL;?>/about.php">О нас</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/transportation.php">Доставка</a>
+                  <a href="<?=PROJECT_URL;?>/transportation.php">Доставка</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/vacancies.php">Работай с нами</a>
+                  <a href="<?=PROJECT_URL;?>/vacancies.php">Работай с нами</a>
                 </li>
                 <li>
-                  <a href="<?=PROJECT_URL?>/contacts.php">Контакты</a>
+                  <a href="<?=PROJECT_URL;?>/contacts.php">Контакты</a>
                 </li>
               </ul>
             </div>
             <div class="line"></div>
-            <div class="sots-seti">
+            <div class="social">
               <p>Мы в социальных сетях</p>
               Сайт разработан в inordic.ru<br>2018 © Все права защищены
               <div class="space-small"></div>
-              <?php $sn = new Social_networks(1);
-              ?><div class="flex-box">
-                <?php foreach($sn->getAllUnits() as $item){
-                  ?><a href="<?=$item['link']?>" rel="noopener noreferrer" target="_blank">
-                  <img src="<?=PROJECT_URL.$item['icon']?>" alt="" /></a>
-                  <div class="box-small"></div>
-                <?php } echo PHP_EOL; ?>
+              <?php $sn = new SocialNetworks(1);?>
+              <div class="flex-box">
+                <?php foreach ($sn->getAllUnits() as $item) {?>
+                <a href="<?=$item['link'];?>" rel="noopener noreferrer" target="_blank">
+                  <img src="<?=PROJECT_URL . $item['icon'];?>" alt="<?=$item['alt']?>" />
+                </a>
+                <div class="box-small"></div>
+                <?php }?>
               </div>
             </div>
           </div>

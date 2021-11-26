@@ -1,6 +1,6 @@
 <?php
 class Orders extends Post {
-  public function setTable(){
+  public function setTable() {
     return 'orders';
   }
 }

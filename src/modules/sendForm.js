@@ -21,12 +21,6 @@ const sendForm = () => {
     const removeMessage = () => {
       setTimeout(() => statusMessage.remove(), 5000);
     };
-    const authForm = () => {
-      setTimeout(() => {
-        const urlReg = location.href.substring(0, location.href.lastIndexOf('/') + 1);
-        location.replace(urlReg + 'login.php');
-      }, 2500);
-    };
     postData(formData, target)
       .then(response => {
         if (response.status !== 200) {
@@ -35,42 +29,44 @@ const sendForm = () => {
         return response.text();
       })
       .then(result => {
-        if (result.indexOf('успешно') !== -1) {
+        if (result.includes('успешно')) {
           if (target.matches('[name="scribe"]')) {
+            target.reset();
             statusMessage.textContent = 'Вы подписаны';
           } else if (target.matches('[name="profile"]')) {
-            statusMessage.textContent = result;
-            authForm();
+            statusMessage.innerHTML = result;
+            setTimeout(() => location.reload(), 2000);
           } else {
-            statusMessage.textContent = result;
-            setTimeout(() => location.replace(location.href), 5500);
+            statusMessage.innerHTML = result;
+            setTimeout(() => location.reload(), 4000);
           }
-          target.reset();
           removeMessage();
-        } else if (result.indexOf('Новый') !== -1) {
-          statusMessage.textContent = result + ' успешно';
-          target.reset();
+        } else if (result.includes('Новый')) {
+          statusMessage.innerHTML = result + ' успешно';
           removeMessage();
-          setTimeout(() => location.replace(location.href), 5500);
-        } else if (result.indexOf('Сообщение') !== -1) {
-          statusMessage.textContent = result;
+        } else if (result.includes('Сообщение')) {
           target.reset();
+          statusMessage.innerHTML = result;
           removeMessage();
-        } else if (result.indexOf('Авторизован') !== -1) {
+        } else if (result.includes('Авторизован')) {
           const url = location.href.substring(0, location.href.lastIndexOf('/auth/') + 1);
           location.replace(url + 'main.php');
-        } else if (result.indexOf('Зарегистрирован') !== -1 || result.indexOf('сгенерирован') !== -1) {
-          statusMessage.textContent = result;
-          authForm();
-        } else if (result.indexOf('Заказ') !== -1) {
-          statusMessage.textContent = result;
-          setTimeout(() => location.replace(location.href), 2500);
-        } else if (result.indexOf('Удалено') !== -1) {
-          setTimeout(() => location.replace(location.href), 500);
+        } else if (result.includes('Зарегистрирован') || result.includes('сгенерирован')) {
+          target.reset();
+          statusMessage.innerHTML = result;
+          setTimeout(() => {
+            const urlReg = location.href.substring(0, location.href.lastIndexOf('/') + 1);
+            location.replace(urlReg + 'login.php');
+          }, 2500);
+        } else if (result.includes('Заказ')) {
+          statusMessage.innerHTML = result;
+          setTimeout(() => location.reload(), 2500);
+        } else if (result.includes('Удалено')) {
+          setTimeout(() => location.reload(), 500);
         } else {
           statusMessage.classList.remove('msg');
           statusMessage.classList.add('msg-error');
-          if (result.indexOf('not found') !== -1 || result.indexOf('Подключение') !== -1) {
+          if (result.includes('not found') || result.includes('Подключение')) {
             statusMessage.textContent = 'Ой, что-то пошло не так.';
           } else {
             statusMessage.innerHTML = result;
@@ -78,7 +74,7 @@ const sendForm = () => {
           removeMessage();
         }
       }).catch(error => {
-        statusMessage.textContent = errorMessage;
+        statusMessage.innerHTML = errorMessage;
         console.error(error);
         removeMessage();
       });
@@ -121,8 +117,8 @@ const sendForm = () => {
     if (!target.querySelector('.msg-error')) {
       //Если нет сообщения об ошибке выполняем действия соответствующие форме
       if (target.closest('[name="scribe"]')) {
-        if (validSend(target.querySelector('input[hidden]')) && target.querySelector('[type="email"]').value
-          .trim() !== '') {
+        if (validSend(target.querySelector('input[hidden]')) &&
+          target.querySelector('[type="email"]').value.trim() !== '') {
           formSubmit(target);
         }
       } else if (target.closest('[name="basket"]')) {
@@ -132,8 +128,8 @@ const sendForm = () => {
           formSubmit(target);
         }
       } else if (target.closest('[name="contacts"]')) {
-        if (validSend(target.querySelector('[name="adm_msg"]')) && target.querySelector('[type="email"]').value
-          .trim() !== '' &&
+        if (validSend(target.querySelector('[name="adm_msg"]')) &&
+          target.querySelector('[type="email"]').value.trim() !== '' &&
           target.querySelector('[type="tel"]').value.trim() !== '') {
           formSubmit(target);
         }
@@ -153,8 +149,8 @@ const sendForm = () => {
         }
       } else if (target.closest('[id="edit"]')) {
         if (validSend(target.querySelector('[name*="id"]')) &&
-          validSend(target.querySelector('[name="category"]')) && validSend(target.querySelector(
-            '[name="categories"]'))) {
+          validSend(target.querySelector('[name="category"]')) &&
+          validSend(target.querySelector('[name="categories"]'))) {
           formSubmit(target);
         }
       } else if (target.closest('[name="users"]')) {

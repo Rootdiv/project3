@@ -1,12 +1,13 @@
 <?php
-  require_once $_SERVER['DOCUMENT_ROOT'].'/project/project3/global_pass.php';
-  require_once PROJECT_ROOT.'/components/header.inc.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . '/project/project3/global_pass.php';
+  require_once PROJECT_ROOT . '/components/header.inc.php';
+  $price_sum = 0;
 ?>
         <main class="box-small basket-block">
           <div class="line"></div>
           <div class="basket-title">
             <div class="space-min"></div>
-            <div class="big-font title-font title-pad">
+            <div class="big-font title">
               Ваша корзина
             </div>
             <div class="new-font size-font title-pad title-mess">
@@ -26,75 +27,70 @@
             </div>
           </div>
           <div class="line"></div>
-          <form name="basket" method="POST" action="<?=PROJECT_URL?>/system/controllers/orders/create.php">
+          <form name="basket" method="POST" action="<?=PROJECT_URL;?>/system/controllers/orders/create.php">
             <div id="basket">
-              <?php if(isset($_SESSION['basket']) === false || $_SESSION['basket'] == null){
-                $price_sum = 0;
-                ?><div class="box">
-                  Ваша корзина пуста
-                </div>
-              <?php }else{
-                $sum = [];
-                $all_goods = $_SESSION['basket'];
-                foreach($all_goods as $elem){
-                  $item = new Goods($elem);
-                  $id = $item->getField('id');
-                  $price = $item->getField('price');
-                  ?><div id="<?=$id?>" class="basket flex-box flex-wrap box-small center">
-                  <div class="flex-box center">
-                    <div class="product-photo" data-id="<?=$id?>">
-                      <a href="<?=PROJECT_URL?>/card.php?id=<?=$id?>" target="_blank">
-                        <img src="<?=PROJECT_URL.$item->getField('photo')?>" alt="Фото" />
-                      </a>
-                    </div>
-                    <div class="box-small"></div>
-                    <div>
-                      <div class="big-font"><b><?=$item->getField('title')?></b></div>
-                      <div>арт. <?=$item->getField('article')?></div>
-                    </div>
+              <?php if (isset($_SESSION['basket']) && !empty($_SESSION['basket'])) {
+              $sum = [];
+              $all_goods = $_SESSION['basket'];
+              foreach ($all_goods as $elem) {
+                $item = new Goods($elem);
+                $id = $item->getField('id');
+                $price = $item->getField('price');?>
+              <div id="<?=$id;?>" class="basket flex-box flex-wrap box-small center">
+                <div class="flex-box center">
+                  <div class="product-photo" data-id="<?=$id;?>">
+                    <a href="<?=PROJECT_URL;?>/card.php?id=<?=$id;?>" target="_blank">
+                      <img src="<?=PROJECT_URL . $item->getField('photo');?>" alt="Фото" />
+                    </a>
                   </div>
-                  <div class="basket-line flex-box to-end">
-                    <div>
-                      <?=$item->getField('sized');
-                      echo PHP_EOL?>
-                    </div>
-                    <label class="number">
-                      <span class="number-plus">+</span>
-                      <input type="number" name="quantity[]" min="1" max="50" value="1" data-price="<?=$price?>" class="quantity">
-                      <span class="number-minus">-</span>
-                    </label>
-                    <div class="price">
-                      <?php echo $price.' руб.';
-                      $sum[] = $price;
-                      echo PHP_EOL ?>
-                    </div>
-                    <div id="remove">
-                      <a href="<?=PROJECT_URL?>/system/controllers/basket/delete.php?id=<?=$id?>">
-                        x
-                      </a>
-                    </div>
+                  <div class="box-small"></div>
+                  <div class="product-info">
+                    <div class="big-font"><b><?=$item->getField('title');?></b></div>
+                    <div>арт. <?=$item->getField('article');?></div>
                   </div>
                 </div>
-                <?php }
-                $price_sum = array_sum($sum);
-              } echo PHP_EOL ?>
+                <div class="basket-line flex-box to-end">
+                  <div><?=$item->getField('sized');?></div>
+                  <label class="number">
+                    <span class="number-plus">+</span>
+                    <input type="number" name="quantity[]" min="1" max="50" value="1" data-price="<?=$price;?>"
+                      class="quantity">
+                    <span class="number-minus">-</span>
+                  </label>
+                  <div class="price">
+                    <?php echo $price . ' руб.'; $sum[] = $price;?>
+                  </div>
+                  <div id="remove">
+                    <a href="<?=PROJECT_URL;?>/system/controllers/basket/delete.php?id=<?=$id;?>">
+                      x
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <?php }
+              $price_sum = array_sum($sum);
+              } else {?>
+              <div class="box">
+                Ваша корзина пуста
+              </div>
+              <?php }?>
             </div>
             <div class="line"></div>
             <div class="total flex-box">
               <div class="basket-line flex-box to-end">
                 <div>Итого:</div>
                 <div class="basket-price">
-                  <label for="basket-mount" id="div-amount" style="visibility: hidden"><?=$price_sum?> руб.</label>
-                  <input hidden id="basket-amount" name="amount" value="<?=$price_sum?>">
+                  <label for="basket-mount" id="div-amount" style="visibility: hidden"><?=$price_sum;?> руб.</label>
+                  <input hidden id="basket-amount" name="amount" value="<?=$price_sum;?>">
                 </div>
                 <div></div>
               </div>
             </div>
             <div class="basket-img flex-box">
-              <img alt="Линия" src="<?=PROJECT_URL?>/img/basket-line.png" />
+              <img alt="Линия" src="<?=PROJECT_URL;?>/img/basket-line.png" />
             </div>
             <div class="delivery-block">
-              <div class="big-font title-font title-pad">
+              <div class="big-font title">
                 Адрес доставки
               </div>
               <div class="new-font size-font title-pad title-mess">
@@ -130,10 +126,10 @@
               <div class="space-min"></div>
             </div>
             <div class="basket-img flex-box">
-              <img alt="Линия" src="<?=PROJECT_URL?>/img/basket-line.png" />
+              <img alt="Линия" src="<?=PROJECT_URL;?>/img/basket-line.png" />
             </div>
             <div class="delivery-block">
-              <div class="big-font title-font title-pad">
+              <div class="big-font title">
                 Варианты оплаты
               </div>
               <div class="new-font size-font title-pad title-mess">
@@ -176,24 +172,18 @@
                   </select>
                 </label>
               </div>
-              <?php if(isset($_COOKIE['member_id']) === false) $user = 0;
-              else $user = $_COOKIE['member_id'];
-              ?><input hidden name="member_id" value="<?=$user?>">
+              <?php $user = isset($_COOKIE['member_id']) ? $_COOKIE['member_id'] : 0;?>
+              <input hidden name="member_id" value="<?=$user;?>">
               <div class="box"></div>
               <button disabled class="big-font">Заказать</button>
             </div>
           </form>
           <div id="modal-kit" class="modal-kit">
-            <?php if(isset($_SESSION['basket']) !== false){ //Проверяем есть ли сессия с именем basket
-              if(!$_SESSION['basket'] == null){ /*Если в корзине что-то есть, то включаем код для модального окна*/
-                echo PHP_EOL ?>
             <div id="modal" class="modal box">
 
             </div>
-              <?php }
-            } echo PHP_EOL ?>
           </div>
         </main>
 <?php
-  require_once PROJECT_ROOT.'/components/footer.inc.php';
+  require_once PROJECT_ROOT . '/components/footer.inc.php';
 ?>

@@ -1,42 +1,54 @@
 .admin-button, .products-edit, .users-edit, .products-new
   width: 135px
   padding: 4px
-  border: 1px solid
+  border: 1px solid #000
   cursor: pointer
-  color: unset
+  color: #000
   text-align: center
-  background-color: lightgrey
+  background-color: #d3d3d3
 
-.orders, .messages
+.order-box, .messages
   .admin-button
+    width: 150px
     margin-top: 10px
 
 .products
   .admin-button
-    width: unset
+    width: auto
   &-new
     margin: 0 auto
 
 .users
-  border-bottom: 1px solid yellowgreen
+  border-bottom: 1px solid #9ACD32
+
   &-info
     div
       &:last-child
         width: 75px
         text-align: center
   &-edit
-    width: unset
+    width: auto
   .admin-button
-    width: unset
+    width: auto
 
 #edit div
   padding-bottom: 5px
 
 .messages
+  width: 50%
+  line-height: 1.5
   padding-right: 20px
+  padding-bottom: 20px
+  .field
+    width: 120px
+    flex-shrink: 0
+  .flex-box
+    border: 1px solid #c5c5c5
+    &:not(:first-child)
+      border-top-width: 0
 
-@media (max-width: 500px)
-  .d-cell
+@media (max-width: 720px)
+  .messages
     width: 100%
 
   .profile .product, .profile .basket-line, .profile .basket
