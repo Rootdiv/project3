@@ -17,50 +17,41 @@ $sql_user = $pdo->prepare("SELECT * FROM core_users WHERE id>0 LIMIT $per_page O
             } else {?>
             <div class="box-small"></div>
             <div class="flex-box flex-wrap">
-              <div class="flex-box box-small">
-                <div>Логин</div>
-                <div class="box-small"></div>
-                <div>Имя</div>
-                <div class="box-small"></div>
-                <div>Доступ</div>
-                <div class="box-small"></div>
-                <div>Ред.</div>
-              </div>
-              <div class="flex-box box-small to-end">
-                <div>E-mail</div>
-                <div class="box-small"></div>
-                <div>IP Адрес</div>
-                <div class="box-small"></div>
-                <div>Удалить</div>
-              </div>
-            </div>
-            <div class="line"></div>
             <?php $sql_user->execute();
             $items = $sql_user->fetchAll();
-            foreach ($items as $item) {?>
-            <div class="users flex-box flex-wrap center">
-              <div class="flex-box center box-small" data-id="<?=$item['id'];?>">
-                <div class="show">
-                  <?=$item['login'];?>
+            foreach ($items as $item) {
+              if ($item['adm'] == 1) {
+                $item_adm = 'Администрация';
+              } elseif ($item['adm'] == 2) {
+                $item_adm = 'Менеджеры';
+              } elseif ($item['adm'] == 3) {
+                $item_adm = 'Пользователи';
+              }?>
+              <div class="users show" data-id="<?=$item['id'];?>">
+                <div class="flex-box">
+                  <div class="field">Логин</div>
+                  <div><?=$item['login'];?></div>
                 </div>
-                <div class="box-small">
-                  <?=$item['username'];?>
+                <div class="flex-box">
+                  <div class="field">Имя</div>
+                  <div><?=$item['username'];?></div>
                 </div>
-                <div class="box-small">
-                  <?=$item['adm'];?>
+                <div class="flex-box">
+                  <div class="field">Доступ</div>
+                  <div><?=$item_adm;?></div>
                 </div>
-                <div class="users-edit" data-id="<?=$item['id'];?>">
-                  Ред.
+                <div class="flex-box">
+                  <div class="field">E-mail</div>
+                  <div><?=$item['email'];?></div>
                 </div>
-              </div>
-              <div class="users-info center flex-box to-end">
-                <div class="box-small">
-                  <?=$item['email'];?>
+                <div class="flex-box">
+                  <div class="field">IP Адрес</div>
+                  <div><?=$item['ip_address'];?></div>
                 </div>
-                <div class="box-small">
-                  <?=$item['ip_address'];?>
-                </div>
-                <div>
+                <div class="flex-box">
+                  <div class="users-edit" data-id="<?=$item['id'];?>">
+                    Редактировать
+                  </div>
                   <form method="POST" action="<?=PROJECT_URL;?>/system/controllers/posts/delete.php">
                     <input hidden name="id" value="<?=$item['id'];?>" />
                     <input hidden name="table_id" value="5" />
@@ -68,9 +59,9 @@ $sql_user = $pdo->prepare("SELECT * FROM core_users WHERE id>0 LIMIT $per_page O
                   </form>
                 </div>
               </div>
+              <!-- /.users -->
+              <?php }?>
             </div>
-            <!-- /.users -->
-            <?php }?>
             <div class="page-num flex-box flex-wrap box">
               <?php paginationNoArrow('admin/'.$filename, $total_page, $page_num);?>
             </div>

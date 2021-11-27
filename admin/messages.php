@@ -17,7 +17,7 @@
             if (empty($items)) {
               echo '<div class="box-small">Сообщений нет</div>';
             }?>
-            <div class="box-small flex-box flex-wrap">
+            <div class="flex-box flex-wrap">
               <?php foreach ($items as $item_msg) {
               $text = str_replace(PHP_EOL, '<br>', $item_msg['text']);
               if ($item_msg['adm_msg'] == 1) {

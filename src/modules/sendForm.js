@@ -43,6 +43,7 @@ const sendForm = () => {
           removeMessage();
         } else if (result.includes('Новый')) {
           statusMessage.innerHTML = result + ' успешно';
+          setTimeout(() => location.reload(), 5500);
           removeMessage();
         } else if (result.includes('Сообщение')) {
           target.reset();

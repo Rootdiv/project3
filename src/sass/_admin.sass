@@ -19,26 +19,29 @@
     margin: 0 auto
 
 .users
-  border-bottom: 1px solid #9ACD32
-
-  &-info
-    div
-      &:last-child
-        width: 75px
-        text-align: center
+  width: 50%
+  line-height: 1.5
+  padding: 10px 0 20px 10px
   &-edit
-    width: auto
+    padding: 0
+    width: 130px
+    margin-right: 20px
+  .field
+    width: 100px
+  .flex-box
+    border: 1px solid #c5c5c5
+    &:last-child
+      border: none
+      margin-top: 10px
+    &:not(:first-child)
+      border-top-width: 0
   .admin-button
-    width: auto
-
-#edit div
-  padding-bottom: 5px
+    width: 80px
 
 .messages
   width: 50%
   line-height: 1.5
-  padding-right: 20px
-  padding-bottom: 20px
+  padding: 10px 0 20px 10px
   .field
     width: 120px
     flex-shrink: 0
@@ -48,13 +51,11 @@
       border-top-width: 0
 
 @media (max-width: 720px)
-  .messages
+  .messages, .users
     width: 100%
 
   .profile .product, .profile .basket-line, .profile .basket
     flex-wrap: wrap
 @media (max-width: 470px)
-  .users-info
-    flex-wrap: wrap
   .products-edit
     margin-bottom: 10px
