@@ -5,10 +5,10 @@ const modalShow = (target, url, set = '') => {
   const modal = document.getElementById('modal');
   const top = window.pageYOffset;
   if (top === 0) {
-    let elem = document.getElementById('modal');
+    const elem = document.getElementById('modal');
     elem.style.top = '20%';
   } else {
-    let elem = document.getElementById('modal');
+    const elem = document.getElementById('modal');
     elem.style.top = top + 40 + 'px';
   }
   const id = target.getAttribute('data-id');
@@ -24,7 +24,7 @@ const modalShow = (target, url, set = '') => {
   }).catch(error => console.error(error));
 
   if (modalKit) {
-    document.addEventListener('keydown', (event) => {
+    document.addEventListener('keydown', event => {
       if (event.code === 'Escape') {
         modalKit.style.display = 'none';
       }

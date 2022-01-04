@@ -3,7 +3,7 @@ const showHidePass = () => {
   //Просмотр пароля на формах с паролем
   const password = document.querySelector('.pass');
   if (password) {
-    password.addEventListener('click', (event) => {
+    password.addEventListener('click', event => {
       const target = event.target;
       if (target.matches('.pass-control')) {
         const input = target.previousElementSibling;

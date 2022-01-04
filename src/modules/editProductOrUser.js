@@ -1,4 +1,4 @@
-import modalShow from './modalShow.js'
+import modalShow from './modalShow.js';
 //Вызов модального окна для редактировании товара или пользователей
 
 const editProductOrUser = () => {
@@ -7,7 +7,7 @@ const editProductOrUser = () => {
   const modalKit = document.getElementById('modal-kit');
   if (profile) {
     const url = location.href.substring(0, location.href.lastIndexOf('/admin/'));
-    profile.addEventListener('click', (event) => {
+    profile.addEventListener('click', event => {
       const target = event.target;
       if (target.matches('.products-edit')) {
         modalShow(target, url, '&product=edit');

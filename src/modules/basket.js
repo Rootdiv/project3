@@ -1,4 +1,4 @@
-import modalShow from './modalShow.js'
+import modalShow from './modalShow.js';
 //Корзина
 
 const basket = () => {
@@ -62,7 +62,7 @@ const basket = () => {
       delivery();
     };
     //Функция удаления товара из корзины
-    const deleteProduct = (target) => {
+    const deleteProduct = target => {
       const deleteUrl = target.getAttribute('href');
       const id = deleteUrl.split('=').pop();
       const basStr = basketSet.innerHTML.split('(');
@@ -71,7 +71,7 @@ const basket = () => {
           throw new Error('Status network not 200');
         }
         document.getElementById(id).remove();
-        let num = parseInt(basStr[1]) - 1;
+        const num = parseInt(basStr[1]) - 1;
         if (num !== 0) {
           basketSet.innerHTML = basStr[0] + '(' + num + ')';
           setID();
@@ -101,7 +101,7 @@ const basket = () => {
       delivery(); //Считаем сумму с доставкой
     }
 
-    basketBlock.addEventListener('click', (event) => {
+    basketBlock.addEventListener('click', event => {
       const target = event.target;
       if (target.matches('.number-plus')) {
         target.nextElementSibling.value++;
@@ -122,7 +122,7 @@ const basket = () => {
       }
     });
     //Модальное окно на странице корзины, если устройство без тач-скрина
-    basketElem.addEventListener('mouseover', (event) => {
+    basketElem.addEventListener('mouseover', event => {
       const target = event.target;
       if (target.closest('.product-photo')) {
         const isTouchDevice = () => ('ontouchstart' in window) || ('onmsgesturechange' in window);

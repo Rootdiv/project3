@@ -6,7 +6,7 @@ abstract class Validator {
 
   //Добавляет сообщение об ошибке в массив
   public function addError($message) {
-    $this->errors[] = $message;
+    $this->errors[] = 'Ошибка. ' . $message;
   }
   //Возвращает список всех найденных ошибок
   public function getErrors() {

@@ -1,16 +1,17 @@
+/* eslint-disable no-var */
 const yaMap = () => {
   'use strict';
   //Карта
   if (document.getElementById('map')) {
-    ymaps.ready(function() {
-      var myMap = new ymaps.Map("map", {
+    window.ymaps.ready(() => {
+      var myMap = new window.ymaps.Map("map", {
           center: [55.776142, 37.648167],
           zoom: 17
         }, {
           searchControlProvider: 'yandex#search'
         }),
         // Создаем геообъект с типом геометрии "Точка".
-        myGeoObject = new ymaps.GeoObject({
+        myGeoObject = new window.ymaps.GeoObject({
           // Описание геометрии.
           geometry: {
             type: "Point",
@@ -20,6 +21,6 @@ const yaMap = () => {
       myMap.geoObjects.add(myGeoObject);
     });
   }
-}
+};
 
 export default yaMap;

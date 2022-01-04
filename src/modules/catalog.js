@@ -3,7 +3,7 @@ const catalog = () => {
   //Фильтры каталога
   const catalogFilter = document.querySelector('.catalog-sort');
   if (catalogFilter) {
-    catalogFilter.addEventListener('click', (event) => {
+    catalogFilter.addEventListener('click', event => {
       const target = event.target;
       if (target.closest('.categories')) {
         const elem = target.closest('.categories');

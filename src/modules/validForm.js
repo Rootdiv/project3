@@ -5,14 +5,14 @@ const validForm = () => {
   errorDiv.textContent = 'Ошибка в этом поле';
   errorDiv.classList.add('msg-error', 'size-font');
   errorDiv.style.textTransform = 'none';
-  const errorValid = (elem) => {
+  const errorValid = elem => {
     if (elem.previousElementSibling && elem.previousElementSibling.classList.contains('error')) {
       elem.previousElementSibling.remove();
     }
     elem.insertAdjacentElement('beforebegin', errorDiv);
   };
   //Функции обработки инпутов
-  const formNamedInput = (event) => {
+  const formNamedInput = event => {
     const target = event.target;
     target.value = target.value.replace(/[^а-яё\s-]/gi, '');
     if (target.value.length > 50) {
@@ -21,7 +21,7 @@ const validForm = () => {
       errorDiv.remove();
     }
   };
-  const formNamedBlur = (event) => {
+  const formNamedBlur = event => {
     const target = event.target;
     if (target.matches('[name="title"]')) {
       target.value = target.value.charAt(0).toUpperCase() + target.value.slice(1).toLowerCase();
@@ -34,30 +34,30 @@ const validForm = () => {
       target.value = '';
     }
   };
-  const formAddressInput = (event) => {
+  const formAddressInput = event => {
     const target = event.target;
-    target.value = target.value.replace(/[^а-яё\d\s\-\.]/gi, '');
+    target.value = target.value.replace(/[^а-яё\d\s\-.]/gi, '');
     if (target.value.length > 100) {
       errorValid(target);
     } else {
       errorDiv.remove();
     }
   };
-  const formAddressBlur = (event) => {
+  const formAddressBlur = event => {
     const target = event.target;
     if (target.value.length < 2 || target.value.length > 100) {
       target.value = '';
     }
   };
-  const formEmailInput = (event) => {
+  const formEmailInput = event => {
     const target = event.target;
-    target.value = target.value.replace(/[^\w\d\_\.\-\@]/gi, '');
+    target.value = target.value.replace(/[^\w\d\-._@]/gi, '');
     errorDiv.remove();
   };
-  const formEmailBlur = (event) => {
+  const formEmailBlur = event => {
     const target = event.target;
     target.value = target.value.replace(/^[\s-]+|[\s-]+$/gi, '').replace(/-+/g, '-');
-    const mailValid = /^[a-z0-9\_\.\-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
+    const mailValid = /^[a-z0-9_.-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
     if (!mailValid.test(target.value) || target.value.trim() === '') {
       if (target.closest('[name="scribe"]')) {
         //Параметры уведомления об ошибке на главной странице
@@ -71,12 +71,12 @@ const validForm = () => {
       errorDiv.remove();
     }
   };
-  const formTextInput = (event) => {
+  const formTextInput = event => {
     const target = event.target;
     if (target.matches('[name="description"]')) {
-      target.value = target.value.replace(/[^а-яё\-\.\,\s\!]/gi, '');
+      target.value = target.value.replace(/[^а-яё\-.,!\s]/gi, '');
     } else {
-      target.value = target.value.replace(/[a-z\$\[\]*{}]/gi, '');
+      target.value = target.value.replace(/[a-z$[\]*{}]/gi, '');
     }
     if (target.value.length > 2000) {
       errorValid(target);
@@ -84,7 +84,7 @@ const validForm = () => {
       errorDiv.remove();
     }
   };
-  const formTextBlur = (event) => {
+  const formTextBlur = event => {
     const target = event.target;
     target.value = target.value.trim().replace(/\s+/g, ' ').replace(/-+/g, '-');
     if (target.value.length < 15 || target.value.length > 2000) {
@@ -93,14 +93,14 @@ const validForm = () => {
       errorDiv.remove();
     }
   };
-  const formPostCodeInput = (event) => {
+  const formPostCodeInput = event => {
     const target = event.target;
     target.value = target.value.replace(/[^\d]/gi, '');
     if (target.value.length > 6) {
       target.value = target.value.substring(0, 6);
     }
   };
-  const formPostCodeBlur = (event) => {
+  const formPostCodeBlur = event => {
     const target = event.target;
     if (target.value.length !== 6) {
       errorValid(target);
@@ -108,22 +108,22 @@ const validForm = () => {
       errorDiv.remove();
     }
   };
-  const formPriceCodeInput = (event) => {
+  const formPriceCodeInput = event => {
     const target = event.target;
     target.value = target.value.replace(/[^\d]/gi, '');
     if (target.value.length > 20) {
       target.value = target.value.substring(0, 20);
     }
   };
-  const formPriceCodeBlur = (event) => {
+  const formPriceCodeBlur = event => {
     const target = event.target;
     if (target.value.length < 2 || target.value.length > 20) {
       target.value = '';
     }
   };
-  const formPhoneInput = (event) => {
+  const formPhoneInput = event => {
     const target = event.target;
-    target.value = target.value.replace(/[^\+\d]/g, '');
+    target.value = target.value.replace(/[^+\d]/g, '');
     if (target.value.length > 12) {
       target.value = target.value.substring(0, 12);
     } else if (target.value.charAt(0) !== '+' || target.value.charAt(1) !== '7') {
@@ -131,19 +131,19 @@ const validForm = () => {
     }
     errorDiv.remove();
   };
-  const formPhoneBlur = (event) => {
+  const formPhoneBlur = event => {
     const target = event.target;
     const phoneValid = /[+]{1}[0-9]{12}/g;
-    target.value = target.value.replace(/^[\+]{1,}/g, '+').replace(/[\+]{1,}$/g, '');
+    target.value = target.value.replace(/^[+]{1,}/g, '+').replace(/[+]{1,}$/g, '');
     if (phoneValid.test(target.value)) {
       errorValid(target);
     } else {
       errorDiv.remove();
     }
   };
-  const formLoginInput = (event) => {
+  const formLoginInput = event => {
     const target = event.target;
-    target.value = target.value.replace(/[^\w\d\_\.\-\@]/gi, '');
+    target.value = target.value.replace(/[^\w\d\-._@]/gi, '');
     if (target.value.indexOf('@') !== -1) {
       if (target.value.length > 50) {
         target.value = target.value.substring(0, 50);
@@ -155,11 +155,11 @@ const validForm = () => {
     }
     errorDiv.remove();
   };
-  const formLoginBlur = (event) => {
+  const formLoginBlur = event => {
     const target = event.target;
     target.value = target.value.replace(/^[\s-]+|[\s-]+$/gi, '').replace(/-+/g, '-');
     if (target.value.indexOf('@') !== -1) {
-      const mailValid = /^[a-z0-9\_\.\-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
+      const mailValid = /^[a-z0-9_.-]+@[a-z0-9-]+\.[a-z]{2,6}$/i;
       if (!mailValid.test(target.value) || target.value.trim() === '') {
         errorValid(target);
       } else {
@@ -171,26 +171,26 @@ const validForm = () => {
       }
     }
   };
-  const formPasswordInput = (event) => {
+  const formPasswordInput = event => {
     const target = event.target;
-    target.value = target.value.replace(/[^\w\+\-\#\%\!]$/gi, '');
+    target.value = target.value.replace(/[^\w\-+#%!]$/gi, '');
     if (target.value.length > 17) {
       target.value = target.value.substring(0, 17);
     }
   };
-  const formPasswordBlur = (event) => {
+  const formPasswordBlur = event => {
     const target = event.target;
     if (target.value.length < 5 || target.value.length > 17) {
       target.value = '';
     }
   };
-  const formFile = (event) => {
+  const formFile = event => {
     const target = event.target;
     if (target.value !== '') {
       const photo = target.value.split('\\');
       const photoName = photo[photo.length - 1];
       const photoInfo = target.value.split('.').pop();
-      const photoNameValid = /^[a-z0-9\.\_\-]+$/i;
+      const photoNameValid = /^[a-z0-9_.-]+$/i;
       const extValid = ['jpg', 'png', 'jpeg', ];
       const photoSize = target.files[0].size;
       if (!photoNameValid.test(photoName)) {
@@ -205,7 +205,7 @@ const validForm = () => {
     }
   };
   //Вешаем слушатель по клику на form и внутри вешаем слушатель на нужный input с вызовом соответствущей функции
-  document.body.addEventListener('click', (event) => {
+  document.body.addEventListener('click', event => {
     const target = event.target;
     if (target.matches('[name*="name"]') || target.matches('[name="city"]') || target.matches('[name="full_name"]') ||
       target.matches('[name="title"]')) {
@@ -234,8 +234,8 @@ const validForm = () => {
     } else if (target.matches('[name="password"]')) {
       target.addEventListener('input', formPasswordInput);
       target.addEventListener('blur', formPasswordBlur);
-    } else if (target.matches('[name="article"]') || target.matches('[name="price"]') || target.matches(
-        '[name="sized"]')) {
+    } else if (target.matches('[name="article"]') || target.matches('[name="price"]') ||
+      target.matches('[name="sized"]')) {
       target.addEventListener('input', formPriceCodeInput);
       target.addEventListener('blur', formPriceCodeBlur);
     } else if (target.matches('[type="file"]')) {
