@@ -36,7 +36,7 @@ if (isset($_POST) && !empty($_POST['login']) && !empty($_POST['email'])) {
     try {
       $sql->execute();
       if (smtpmail($login, $email, 'Новый пароль', $message)) {
-        exit('Новый пароль сгенерирован.');
+        exit('Пароль сгенерирован, проверьте Вашу почту.');
       } else {
         exit('Письма нет, обратитесь к администрации для восстановления доступа.');
       }

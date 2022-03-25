@@ -1,6 +1,7 @@
 import modalShow from './modalShow.js';
-//Вызов модального окна для редактировании товара или пользователей
+import showHidePass from './showHidePass.js';
 
+//Вызов модального окна для редактировании товара или пользователей
 const editProductOrUser = () => {
   'use strict';
   const profile = document.querySelector('.profile');
@@ -15,6 +16,7 @@ const editProductOrUser = () => {
         modalShow(target, url, '&product=new');
       } else if (target.matches('.users-edit')) {
         modalShow(target, url, '&user=edit');
+        setTimeout(showHidePass, 1000);
       } else if (target.matches('.modal-close')) {
         modalKit.style.display = 'none';
       } else if (target.matches('.overlay')) {

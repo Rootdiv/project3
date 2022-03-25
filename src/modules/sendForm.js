@@ -19,9 +19,10 @@ const sendForm = () => {
     const removeMessage = () => {
       setTimeout(() => statusMessage.remove(), 5000);
     };
-    const setErrorClass = () => {
+    const setError = message => {
       statusMessage.classList.remove('msg');
       statusMessage.classList.add('msg-error');
+      statusMessage.textContent = message;
     };
     postData(formData, target)
       .then(response => {
@@ -35,13 +36,12 @@ const sendForm = () => {
           if (target.matches('[name="scribe"]')) {
             target.reset();
             statusMessage.textContent = 'Вы подписаны';
-          } else if (target.matches('[name="profile"]')) {
+          } else if (target.matches('[name="profile"]') || target.matches('[id="edit"]') ||
+            target.matches('[name="users"]')) {
             statusMessage.textContent = result;
             setTimeout(() => location.reload(), 2000);
           } else {
-            statusMessage.classList.remove('msg-error');
-            statusMessage.classList.add('msg');
-            statusMessage.textContent = result;
+            setError(result);
             setTimeout(() => location.reload(), 4000);
           }
           removeMessage();
@@ -69,17 +69,17 @@ const sendForm = () => {
         } else if (result.includes('Удалено')) {
           setTimeout(() => location.reload(), 500);
         } else if (result.includes('not found') || result.includes('Подключение')) {
-          setErrorClass();
-          statusMessage.textContent = 'Ой, что-то пошло не так.';
+          setError('Ой, что-то пошло не так.');
           removeMessage();
         } else if (result.includes('Ошибка')) {
-          setErrorClass();
-          statusMessage.textContent = result;
+          setError(result);
+          removeMessage();
+        } else {
+          setError(result);
           removeMessage();
         }
       }).catch(error => {
-        setErrorClass();
-        statusMessage.textContent = errorMessage;
+        setError(errorMessage);
         console.error(error);
         removeMessage();
       });
