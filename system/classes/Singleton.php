@@ -19,12 +19,12 @@ abstract class Singleton {
   /**
    * Сериализация запрещена
    */
-  private function __sleep() {
+  public function __sleep() {
   }
 
   /**
    * Десериализация запрещена
    */
-  private function __wakeup() {
+  public function __wakeup() {
   }
 }

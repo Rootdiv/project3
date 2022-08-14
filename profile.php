@@ -51,7 +51,7 @@
             }?>
             <div class="flex-box flex-wrap">
             <?php foreach ($items as $item_profile) {
-              if ($item_profile['member_id'] === $user_id) {
+              if ($item_profile['member_id'] == $user_id) {
                 $product_name_profile = str_replace('","', ', ', trim($item_profile['product_name'], '["]'));
                 $art_profile = str_replace('","', ', ', trim($item_profile['article'], '["]'));
                 $size_profile = str_replace('","', ', ', trim($item_profile['sized'], '["]'));
@@ -126,15 +126,15 @@
                   <div><?=$item_profile['payment'];?></div>
                 </div>
               </div>
-                <!-- /.order-box -->
+              <!-- /.order-box -->
               <?php } #endif-id
               } #endforeach?>
-            <div class="page-num flex-box flex-wrap box">
-              <?php paginationArrow($filename, $total_page, $page_num, $per_page, 'history=1&');?>
             </div>
-            <!-- /.page-num -->
+            <!-- /.profile -->
+          <div class="page-num flex-box flex-wrap box">
+            <?php paginationArrow($filename, $total_page, $page_num, $per_page, 'history=1&');?>
           </div>
-          <!-- /.profile -->
+          <!-- /.page-num -->
           <?php } #endif-history?>
           <div class="box-small"></div>
         </main>

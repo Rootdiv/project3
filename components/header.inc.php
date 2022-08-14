@@ -15,6 +15,9 @@
     }
   }
 
+  session_start(); //Старт сессии и создание пустой корзины.
+  isset($_SESSION['basket']) ?: $_SESSION['basket'] = [];
+
   $login_status = '<a href="' . PROJECT_URL . '/auth/login.php"><img src="' . PROJECT_URL . '/img/icons/account.png"
     alt="Аккаунт"/>Войти</a>';
   if (isset($_COOKIE['member_id']) && !empty($_COOKIE['member_id'])) {
@@ -77,8 +80,8 @@
                   <li><?=$login_status;?></li>
                   <li>
                     <a id="basket-set" href="<?=PROJECT_URL;?>/basket.php">
-                      <img src="<?=PROJECT_URL;?>/img/icons/basket.png" alt="Корзина" />Корзина (<?php session_start();
-echo (isset($_SESSION['basket'])) ? count($_SESSION['basket']) : 0;?>)
+                      <img src="<?=PROJECT_URL;?>/img/icons/basket.png" alt="Корзина" />Корзина (<?php
+                      echo (empty($_SESSION['basket'])) ? 0 : count($_SESSION['basket']);?>)
                     </a>
                   </li>
                 </ul>

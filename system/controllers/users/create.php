@@ -12,8 +12,9 @@ if (isset($_POST) && !empty($_POST['login']) && !empty($_POST['email']) && !empt
   $email = $_POST['email'];
   $new_user = new Member();
   $table = $new_user->setTable();
-  $sql = $pdo->prepare("SELECT * FROM $table WHERE login=:login");
+  $sql = $pdo->prepare("SELECT * FROM $table WHERE login=:login OR email=:email");
   $sql->bindParam(':login', $login);
+  $sql->bindParam(':email', $email);
   $sql->execute();
   $rows = $sql->fetch();
   if (!empty($rows)){

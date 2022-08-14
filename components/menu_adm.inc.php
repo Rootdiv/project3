@@ -28,10 +28,10 @@ $admin_mail = [];
 $manager_mail = [];
 $item = $sql_user->fetchAll();
 foreach ($item as $adm) {
-  if ($adm['adm'] === '1') {
+  if ($adm['adm'] == '1') {
     $root[] = $adm['id'];
     $admin_mail[] = $adm['email'];
-  } elseif ($adm['adm'] === '2') {
+  } elseif ($adm['adm'] == '2') {
     $manager[] = $adm['id'];
     $manager_mail[] = $adm['email'];
   }
