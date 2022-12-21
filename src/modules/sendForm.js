@@ -17,7 +17,11 @@ const sendForm = () => {
     statusMessage.innerHTML = loader;
     const formData = new FormData(target);
     const removeMessage = () => {
-      setTimeout(() => statusMessage.remove(), 5000);
+      setTimeout(() => {
+        statusMessage.remove();
+        statusMessage.classList.add('msg');
+        statusMessage.classList.remove('msg-error');
+      }, 5000);
     };
     const setError = message => {
       statusMessage.classList.remove('msg');

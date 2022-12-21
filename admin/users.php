@@ -2,7 +2,7 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/project/project3/global_pass.php';
 require_once PROJECT_ROOT . '/components/header.inc.php';
 require_once PROJECT_ROOT . '/components/check_adm.inc.php';
-$per_page = 5; //Количество записей на странице редактирования пользователей
+$per_page = 6; //Количество записей на странице редактирования пользователей
 $count = $pdo->query("SELECT COUNT(*) FROM core_users")->fetchColumn();
 require_once PROJECT_ROOT . '/components/pagination.inc.php';
 $sql_user = $pdo->prepare("SELECT * FROM core_users WHERE id>0 LIMIT $per_page OFFSET $list");
@@ -49,13 +49,13 @@ $sql_user = $pdo->prepare("SELECT * FROM core_users WHERE id>0 LIMIT $per_page O
                   <div><?=$item['ip_address'];?></div>
                 </div>
                 <div class="flex-box">
-                  <div class="users-edit" data-id="<?=$item['id'];?>">
+                  <button type="button" class="users-edit" data-id="<?=$item['id'];?>">
                     Редактировать
-                  </div>
+                  </button>
                   <form method="POST" action="<?=PROJECT_URL;?>/system/controllers/posts/delete.php">
                     <input hidden name="id" value="<?=$item['id'];?>" />
                     <input hidden name="table_id" value="5" />
-                    <button class="admin-button">Удалить</button>
+                    <button type="submit" class="admin-button">Удалить</button>
                   </form>
                 </div>
               </div>

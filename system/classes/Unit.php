@@ -24,7 +24,12 @@ abstract class Unit implements UnitActions {
 
   //Метод для получения поля из строки в таблице БД
   public function getField($field) {
-    return trim($this->getLine()->$field);
+    $db_field = $this->getLine()->$field;
+    //Если поле существует, то возвращаем его.
+    if($db_field) {
+      return trim($db_field);
+    }
+    return '';
   }
 
   //Метод для создания строки в таблице БД
