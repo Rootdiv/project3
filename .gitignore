@@ -1,6 +1,5 @@
 .vscode/
 node_modules/
-package-lock.json
 uploads/catalog/**
 global_pass.php
 config_mail.php
