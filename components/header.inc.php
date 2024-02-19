@@ -33,12 +33,13 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Интернет-магазин создан в учебных целях, никакие товары на сайте не продаются" />
     <link rel="shortcut icon" href="<?=PROJECT_URL;?>/img/icons/favicon.ico" type="image/x-icon" />
-    <title>Проект 3. <?=$title;?></title>
     <link rel="stylesheet" type="text/css" href="<?=PROJECT_URL;?>/css/styles.css" />
     <script defer src="<?=PROJECT_URL;?>/js/main.js"></script>
+    <title>Проект 3. <?=$title;?></title>
   </head>
   <body>
     <div class="go-top">
